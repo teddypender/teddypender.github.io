@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Odin - A Jekyll Knowledge Base Theme
-description: Odin is a simple to setup and use Jekyll theme for help desks and knowledge bases. Hosts for free on Github Pages!
+title: Teddy - A Jekyll Knowledge Base Theme
+description: Teddy is a simple to setup and use Jekyll theme for help desks and knowledge bases. Hosts for free on Github Pages!
 baseurl: /odin # the subpath of your site, e.g. /support
 url: https://teaguns.github.io # the base hostname AND PROTOCOL for your site, e.g. http://example.com
 permalink: /:categories/:title
@@ -29,7 +29,7 @@ use_authors: true #Set this to false to disable showing post authors
 
 brand_logo: logo.png
 brand_name: Odin
-header: How can we help you?
+header: How can we help you? Test 
 subheader: Support and documentation for Odin
 
 meta_image: odin-meta.png
