@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Teddy - A Jekyll Knowledge Base Theme
-description: Teddy is a simple to setup and use Jekyll theme for help desks and knowledge bases. Hosts for free on Github Pages!
+title: Mamillius - My Calf.
+description: Mamillius is the precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
 baseurl: /odin # the subpath of your site, e.g. /support
 url: https://teaguns.github.io # the base hostname AND PROTOCOL for your site, e.g. http://example.com
 permalink: /:categories/:title
@@ -30,15 +30,15 @@ use_authors: true #Set this to false to disable showing post authors
 brand_logo: logo.png
 brand_name: Odin
 header: How can we help you? Test 
-subheader: Support and documentation for Odin
+subheader: Support and documentation for Mamillius
 
 meta_image: odin-meta.png
 
 # Social Links
-twitter_username: TheTeaGuns
+twitter_username: Mamillius9
 facebook_page:
-github_username: TeaGuns
-email: m@credd.in
+github_username: teddypender
+email: teddyjfpender@jmail.com
 linkedin_page:
 instagram_username: 
 
@@ -53,11 +53,11 @@ nav_item_two_link: https://twitter.com/TeddyGrizzly
 nav_item_three: #
 nav_item_three_link: #
 
-nav_button: Return to Odin Home
+nav_button: Return to Mamillius Home
 nav_button_link: https://teaguns.github.io/odin/
 
 # More Help
-help_one_title: Odin Bugs
+help_one_title: Mamillius Bugs
 help_one_content: If you find any bugs or problems with this theme, please open an issue over on Github.
 help_one_button: Github
 help_one_link: https://github.com/TeaGuns/odin/issues
