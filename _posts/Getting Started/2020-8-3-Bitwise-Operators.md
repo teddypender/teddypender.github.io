@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Introduction: Bitwise Operators"
+date: 2020-08-03 16:48:38 -0400
+category: getting-started
+author: teddy
+short-description: A first glance at bitwise operators.
+---
+
 # Bitwise-Operators
 Bitwise operators are extremely useful. Unfortunately, they often go overlooked - this repository is here to change that.
 
