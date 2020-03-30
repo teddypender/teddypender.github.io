@@ -54,13 +54,13 @@ nav_item_three: #
 nav_item_three_link: #
 
 nav_button: Return to Mamillius Home
-nav_button_link: https://teaguns.github.io/odin/
+nav_button_link: https://teddypender.github.io/
 
 # More Help
 help_one_title: Mamillius Bugs
 help_one_content: If you find any bugs or problems with this theme, please open an issue over on Github.
 help_one_button: Github
-help_one_link: https://github.com/TeaGuns/odin/issues
+help_one_link: https://github.com/teddypender/teddypender.github.io/issues
 
 help_two_title: Twitter
 help_two_content: Feel free to tweet at me if you have suggestions for this site. Or if you just want to say hi!
