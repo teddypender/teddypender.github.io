@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Agent Based Modeling: Diffusion"
-date: 2020-30-03 16:48:38 -0400
+date: 2020-03-03 16:48:38 -0400
 category: getting-started
 author: teddy
 short-description: A first glance at bitwise operators.
