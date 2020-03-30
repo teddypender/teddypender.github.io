@@ -3,3 +3,7 @@
 mac:
   name: Mac Reddin
   image: mac.png
+  
+teddy:
+  name: Teddy Pender
+  image: teddy.png
