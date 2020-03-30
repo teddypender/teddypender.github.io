@@ -19,9 +19,9 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Mamillius - My Calf.
-description: Mamillius is the precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
+description: Mamillius is a precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
 baseurl: #/odin # the subpath of your site, e.g. /support
-url: https://teaguns.github.io # the base hostname AND PROTOCOL for your site, e.g. http://example.com
+url: https://teddypender.github.io/ # the base hostname AND PROTOCOL for your site, e.g. http://example.com
 permalink: /:categories/:title
 
 content_type: Knowledge Base #Define whether this is a knowledge base, help center, or something else
