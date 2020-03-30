@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Agent Based Modeling: Diffusion"
+date: 2020-30-03 16:48:38 -0400
+category: getting-started
+author: teddy
+short-description: A first glance at bitwise operators.
+---
+
 <br />
 <p align="center">
   <a href="https://anuraghazra.github.io/covid19-sim">
