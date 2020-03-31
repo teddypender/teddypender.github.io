@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Introduction: Bitwise Operators II"
 date: 2020-12-03 16:48:38 -0400
 category: mathematical-modeling
