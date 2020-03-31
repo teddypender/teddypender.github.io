@@ -71,13 +71,13 @@ short-description: Simulation.
   </main>
   <small>Click to add hospitals</small>
 
-  <script src="./src/UI.js"></script>
-  <script src="./src/Vector.js"></script>
-  <script src="./src/utils.js"></script>
-  <script src="./src/Hospital.js"></script>
-  <script src="./src/Boid.js"></script>
-  <script src="./src/Flock.js"></script>
-  <script src="./index.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/UI.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/Vector.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/utils.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/Hospital.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/Boid.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/src/Flock.js"></script>
+  <script src="{{site.baseurl}}posts/Mathematical Modeling/index.js"></script>
 </body>
 
 </html>
