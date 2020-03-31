@@ -1,15 +1,18 @@
 #This file defines all the categories you 
 
-
+mathematical-modeling:
+  name: Mathematical Modeling
+  description: Welcome to Mamillius, time to get started
 getting-started:
   name: Getting Started
   description: Welcome to Mamillius, time to get started
 using-odin:
   name: Using Odin
   description: Welcome to Mamillius, time to get started
+using-udin:
+  name: Using Udin
+  description: Welcome to Mamillius, time to get started
 customizing-odin:
   name: Customizing Odin
   description: Welcome to Mamillius, time to get started
-mathematical-modeling:
-  name: Mathematical Modeling
-  description: Welcome to Mamillius, time to get started
+
