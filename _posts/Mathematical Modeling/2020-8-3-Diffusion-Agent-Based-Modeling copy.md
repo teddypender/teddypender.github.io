@@ -11,7 +11,7 @@ short-description: A first glance at diffusing using an agent based model.
 <p align="center">
   <a href="https://anuraghazra.github.io/covid19-sim">
     <h2 align="center">COVID-19 Simulation</h2>
-    <img src="./assets/screenshot.png" />
+    <img src="assets/screenshot.png" />
   </a>
 
   <p align="center">
