@@ -2,7 +2,7 @@
 layout: post
 title: "Introduction: Bitwise Operators II"
 date: 2020-12-03 16:48:38 -0400
-category: getting-started
+category: mathematical-modeling
 author: teddy
 short-description: A first glance at bitwise operators.
 ---
