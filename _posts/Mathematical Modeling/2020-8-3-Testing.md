@@ -15,3 +15,13 @@ Bitwise operators are similar to logical operators but they work on a smaller sc
 For example, we would call:
 * ```5 <bitwise-operator> 2``` not ```0101 <bitwise-operator> 0010``` 
 
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>
