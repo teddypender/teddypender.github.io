@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Diffusion: An Agent Based Model of Infection"
+date: 2020-12-03 16:48:38 -0400
+category: mathematical-modeling
+author: teddy
+short-description: A first glance at diffusing using an agent based model.
+---
+
 <br />
 <p align="center">
   <a href="https://anuraghazra.github.io/covid19-sim">
@@ -30,7 +39,7 @@ You can learn more about them on Daniel Shiffman's YouTube Channel [The Coding T
 
 - [9. Genetic Algorithm playlist The Nature of Code](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6bJM3VgzjNV5YxVxUwzALHV)
 
-## :rocket: Quick start
+## Quick start
 
 Start developing locally.
 
@@ -42,7 +51,7 @@ Fork the repository. then clone the repo locally by doing -
 git clone https://github.com/anuraghazra/covid19-sim.git
 ```
 
-## :v: Contributing
+## Contributing
 
 After cloning & setting up the local project you can push the changes to your github fork and make a pull request.
 
