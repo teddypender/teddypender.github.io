@@ -8,15 +8,15 @@ let height = window.innerHeight;
 
 const FLEE_RADIUS = 100;
 const BOIDS_COUNT = 200;
-const HOSPITALS_COUNT = 5;
-const HOSPITAL_MAX_CAPACITY = 10;
+const HOSPITALS_COUNT = 2;
+const HOSPITAL_MAX_CAPACITY = 5;
 const GLOBAL_MULTIPLIER = {
   separateRadius: 4,
   separate: 1.2,
   align: 0.8,
   cohesion: 0.3,
   wander: 0.5,
-  maxSpeed: 1.8
+  maxSpeed: 1.0
 }
 // map of boid ids
 const STATS = {

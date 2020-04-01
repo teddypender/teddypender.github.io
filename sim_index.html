@@ -4,22 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Coronavirus Simulation With Flocking System">
+  <meta name="description" content="Simulation of Diffusion (Including Flocking System)">
   <meta name="keywords" content="coronavirus,covid19,JavaScript,Boids,Flocking,Agents,Behaviors,Daniel,Shiffman">
-  <meta name="author" content="Anurag Hazra">
+  <meta name="author" content="Theodore Pender">
 
-  <title>COVID-19 SIM</title>
+  <title>Diffusion: </title>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"
     integrity="sha256-GV8Ae3zupj/zU9Wi2ryJneXgcJlV9+vYCo5CTf5BmGY=" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style_diffusion.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/3.0.0/pretty-checkbox.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
 
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119972196-2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,6 +32,7 @@
 
     gtag('config', 'UA-119972196-1');
   </script>
+  -->
 </head>
 
 <body>
@@ -48,17 +50,17 @@
       <div class="pretty p-default p-round p-smooth">
         <input id="keep-distance" type="checkbox" />
         <div class="state p-success">
-          <label for="keep-distance">Keep social distancing</label>
+          <label for="keep-distance">Social Distancing</label>
         </div>
       </div>
       <div class="pretty p-default p-round p-smooth">
         <input id="dont-listen" type="checkbox" />
         <div class="state p-success">
-          <label for="dont-listen">Don't listen to Gov.</label>
+          <label for="dont-listen">Normal Flocking Behavior</label>
         </div>
       </div>
 
-      <button id="add-infected">Add Infected People</button>
+      <button id="add-infected">Introduce Infected Agents</button>
     </section>
   </main>
   <small>Click to add hospitals</small>
@@ -69,7 +71,7 @@
   <script src="./src/Hospital.js"></script>
   <script src="./src/Boid.js"></script>
   <script src="./src/Flock.js"></script>
-  <script src="./index.js"></script>
+  <script src="./index_diffusion.js"></script>
 </body>
 
 </html>
