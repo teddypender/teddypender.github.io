@@ -12,7 +12,7 @@ canvas {
 }
 
 .wrapper {
-  background-color: rgba(241, 241, 241, 0.02);
+  background-color: rgba(255, 255, 255, 0.02);
   color: #f1f1f1;
   position: absolute;
   padding: 20px;
@@ -24,7 +24,7 @@ canvas {
 
 .wrapper:hover {
   background-color: #f1f1f1;
-  color: #242424;
+  color: #000000;
   transition: 0.3s;
 }
 
@@ -37,16 +37,16 @@ canvas {
 }
 
 .stats .infected {
-  color: #ff0f23;
+  color: #D22C2C;
 }
 
 .stats .dead {
-  color: #959595;
+  color: #5D5F5C;
 }
 
 .stats .alive,
 .recovered {
-  color: #2fb425;
+  color: #2BD073;
 }
 
 .stats > p {
