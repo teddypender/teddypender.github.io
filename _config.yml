@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Mamillius - My Calf.
-description: Mamillius is a precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
+title: Mamillius.
+description: #Mamillius is a precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
 baseurl: #/odin # the subpath of your site, e.g. /support
 url: https://teddypender.github.io/ # the base hostname AND PROTOCOL for your site, e.g. http://example.com
 permalink: /:categories/:title
