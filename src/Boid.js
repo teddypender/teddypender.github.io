@@ -7,17 +7,19 @@ class Boid {
 
     this.id = cuid();
 
-    this.radius = radius || 5;
-    this.maxSpeed = 1.8;
+    this.radius = radius || 1; //Boid size
+    this.maxSpeed = 1.0;
     this.maxForce = 0.05;
-    this.mass = 0.2;
+    this.mass = 0.5;
 
     // this.isInfected = randomInt(2) < 0.5 ? true : false;
     this.isInfected = false;
+    this.isRecovered = false;
     this.health = 1;
     this.isDead = false;
-    this.deathRatio = 0.34;
+    this.deathRatio = GLOBAL_MULTIPLIER.deathRatio; //0.01;
     this.infectionRatio = 0.76;
+    this.immuneSystemStrength = Math.random(); //rand(0,1);
 
     this.flock = new Flock(this);
     this.flockMultiplier = GLOBAL_MULTIPLIER;
@@ -33,6 +35,7 @@ class Boid {
     this.vel.add(this.acc);
     this.vel.limit(this.maxSpeed);
     this.pos.add(this.vel);
+    this.deathRatio = GLOBAL_MULTIPLIER.deathRatio;
     this.acc.mult(0);
 
     this.dying();
@@ -50,6 +53,7 @@ class Boid {
   recover() {
     if (this.isInfected) {
       this.isInfected = false;
+      this.isRecovered = true;
       this.health = 1;
       STATS.recovered[this.id] = 1;
       delete STATS.infected[this.id];
@@ -93,6 +97,7 @@ class Boid {
       }
       if (this.health <= 0) {
         this.isDead = true;
+        this.isInfected = false;
       }
     }
   }
@@ -165,12 +170,14 @@ class Boid {
 
       const isCloseEnough = maxDist < (this.radius + boidB.radius);
       const oneOfThemIsInfected = (this.isInfected || boidB.isInfected);
-      // const oneOfThemNotDead = this.isDead || boidB.isDead;
+      const oneOfThemNotDead = this.isDead || boidB.isDead;
+      const oneOfThemIsRecovered = this.isRecovered || boidB.isRecovered;
 
       if (
         isCloseEnough
         && oneOfThemIsInfected
-        // && !oneOfThemNotDead
+        && !oneOfThemNotDead
+        && !oneOfThemIsRecovered
         && this.willInfect()
       ) {
         if (this.isInfected) {
@@ -183,6 +190,14 @@ class Boid {
         }
       }
     }
+  }
+  
+  healNaturally(boid) {
+    if (boid.isInfected &&  0.7 < this.immuneSystemStrength) {
+      boid.recover();
+      boid.isRecovered = true;
+      //this.healed[boid.id] = 1;
+    } 
   }
 
 
@@ -197,7 +212,8 @@ class Boid {
     ctx.save();
 
     ctx.fillStyle = this.isInfected ? `rgb(255, 15, 35)` : '#5bf351';
-    if (this.isDead) ctx.fillStyle = '#959595';
+    if (this.isRecovered) ctx.fillStyle = '#395CAA';
+    if (this.isDead) ctx.fillStyle = '#999999';
 
     ctx.translate(this.pos.x, this.pos.y);
     ctx.rotate(angle);

@@ -41,11 +41,14 @@ canvas {
 }
 
 .stats .dead {
-  color: #5D5F5C;
+  color: #959595;
 }
 
-.stats .alive,
-.recovered {
+.stats .recovered {
+  color: #395CAA;
+}
+
+.stats .alive {
   color: #2BD073;
 }
 

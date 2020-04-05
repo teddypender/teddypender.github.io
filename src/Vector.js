@@ -1,10 +1,4 @@
-/**
- * Vector.js v1.0.0
- * @author Anurag Hazra
- * @borrows p5.Vector
- * @param {number} x 
- * @param {number} y 
- */
+
 function Vector(x, y) {
   this.x = x || 0;
   this.y = y || 0;
