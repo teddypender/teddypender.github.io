@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Mamillius.
-description: #Mamillius is a precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
+description: Mathematics & Computer Science #Mamillius is a precocious young project. He looks cute but he is also a handful, as he spends most of his time horsing around, declaring that he is a big boy and not a “baby”.
 baseurl: #/odin # the subpath of your site, e.g. /support
 url: https://teddypender.github.io/ # the base hostname AND PROTOCOL for your site, e.g. http://example.com
 permalink: /:categories/:title
@@ -28,9 +28,9 @@ content_type: Knowledge Base #Define whether this is a knowledge base, help cent
 use_authors: true #Set this to false to disable showing post authors
 
 brand_logo: logo.png
-brand_name: Odin
-header: How can we help you? Test 
-subheader: Support and documentation for Mamillius
+brand_name: Mamillius
+header: Welcome to Mamillius!
+subheader: Choose a section
 
 meta_image: odin-meta.png
 

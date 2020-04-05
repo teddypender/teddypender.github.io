@@ -8,6 +8,7 @@ class UI {
     this.dontListenGovCheckbox = null;
     this.deathRatio = null;
     this.addInfectedButton = null;
+    this.infectionRatio = null;
   }
 
   init() {
@@ -19,15 +20,20 @@ class UI {
       this.keepDistanceCheckbox = document.querySelector('#keep-distance');
       this.dontListenGovCheckbox = document.querySelector('#dont-listen');
       this.deathRatio = document.querySelector('#deadliness');
+      this.infectionRatio = document.querySelector('#transmissibility');
       this.addInfectedButton = document.querySelector('#add-infected');
 
       this.keepDistanceCheckbox.addEventListener('input', function () {
         GLOBAL_MULTIPLIER.separateRadius = this.checked ? 10 : 4; // simple if statement with ? :, if checked is true then radius is 10 else 4
       })
       this.deathRatio.addEventListener('mouseup', function () {
-        //GLOBAL_MULTIPLIER.deathRatio = this.checked ? 0.8 : 0.2;
         if (this.value > 1) {
         GLOBAL_MULTIPLIER.deathRatio = this.value / 100;
+        }
+      })
+      this.infectionRatio.addEventListener('mouseup', function () {
+        if (this.value > 1) {
+        GLOBAL_MULTIPLIER.infectionRatio = this.value / 100;
         }
       })
       this.dontListenGovCheckbox.addEventListener('input', function () {
@@ -42,6 +48,14 @@ class UI {
         // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
           output.innerHTML = this.value / 100;
+        }
+      var slider_trans = document.getElementById("transmissibility");
+      var output_trans = document.getElementById("demo_trans");
+      output_trans.innerHTML = slider_trans.value; // Display the default slider value
+        
+        // Update the current slider value (each time you drag the slider handle)
+      slider_trans.oninput = function() {
+          output_trans.innerHTML = this.value / 100;
         }
     })
   }

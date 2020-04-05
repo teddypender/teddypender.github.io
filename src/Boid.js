@@ -18,7 +18,7 @@ class Boid {
     this.health = 1;
     this.isDead = false;
     this.deathRatio = GLOBAL_MULTIPLIER.deathRatio; //0.01;
-    this.infectionRatio = 0.76;
+    this.infectionRatio = GLOBAL_MULTIPLIER.infectionRatio; //0.76;
     this.immuneSystemStrength = Math.random(); //rand(0,1);
 
     this.flock = new Flock(this);
@@ -36,6 +36,7 @@ class Boid {
     this.vel.limit(this.maxSpeed);
     this.pos.add(this.vel);
     this.deathRatio = GLOBAL_MULTIPLIER.deathRatio;
+    this.infectionRatio = GLOBAL_MULTIPLIER.infectionRatio;
     this.acc.mult(0);
 
     this.dying();
