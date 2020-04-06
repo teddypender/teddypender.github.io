@@ -54,7 +54,7 @@ class UI {
         
         // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
-          output.innerHTML = this.value / 100;
+          output.innerHTML = this.value;
         }
       var slider_trans = document.getElementById("transmissibility");
       var output_trans = document.getElementById("demo_trans");
@@ -62,7 +62,7 @@ class UI {
         
         // Update the current slider value (each time you drag the slider handle)
       slider_trans.oninput = function() {
-          output_trans.innerHTML = this.value / 100;
+          output_trans.innerHTML = this.value;
         }
         
       var slider_heal = document.getElementById("healing");
@@ -71,7 +71,7 @@ class UI {
         
         // Update the current slider value (each time you drag the slider handle)
       slider_heal.oninput = function() {
-          output_heal.innerHTML = this.value / 100;
+          output_heal.innerHTML = this.value;
         }
     })
   }
