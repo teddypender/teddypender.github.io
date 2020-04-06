@@ -116,6 +116,8 @@ class Boid {
       if (this.health >= 1) {
         this.isInfected = false;
         this.isRecovered = true;
+        delete STATS.infected[this.id];
+
       }
     }
   }
