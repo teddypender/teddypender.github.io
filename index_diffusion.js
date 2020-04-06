@@ -3,8 +3,8 @@
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-const FLEE_RADIUS = 100;
-const BOIDS_COUNT = 600;
+const FLEE_RADIUS = 10;
+const BOIDS_COUNT = 700;
 const IMMUNE_COUNT = 200;
 const INFECTED_COUNT = 100;
 const HOSPITALS_COUNT = 0;
