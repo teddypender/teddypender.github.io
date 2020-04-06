@@ -67,7 +67,7 @@ class UI {
         
       var slider_heal = document.getElementById("healing");
       var output_heal = document.getElementById("demo_heal");
-      output_heal.innerHTML = slider_trans.value; // Display the default slider value
+      output_heal.innerHTML = slider_heal.value; // Display the default slider value
         
         // Update the current slider value (each time you drag the slider handle)
       slider_heal.oninput = function() {
