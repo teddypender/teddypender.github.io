@@ -20,4 +20,3 @@ amongst a group of people. It is up to you to define how the diffusion occurs. B
 Go and play with the model [here] (https://www.google.com).
 
 ## More soon.
-
