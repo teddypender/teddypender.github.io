@@ -96,7 +96,7 @@ class Boid {
 
   dying() {
     // death ratio
-    if (random(0,1) < this.deathRatio) {
+    if (Math.random() < this.deathRatio) {
       if (this.isInfected) {
         this.health -= clamp(0.01, 0, 1);
       }
@@ -109,7 +109,7 @@ class Boid {
   
   healing() {
     // healing ratio
-    if (random(0,1) < this.healingRate) {
+    if (Math.random() < this.healingRate) {
       if (this.isInfected) {
         this.health += clamp(0.01, 0, 1);
       }
