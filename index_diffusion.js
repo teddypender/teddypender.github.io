@@ -4,8 +4,8 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 
 const FLEE_RADIUS = 100;
-const BOIDS_COUNT = 900;
-const IMMUNE_COUNT = 0;
+const BOIDS_COUNT = 600;
+const IMMUNE_COUNT = 200;
 const INFECTED_COUNT = 100;
 const HOSPITALS_COUNT = 0;
 const HOSPITAL_MAX_CAPACITY = 10;
@@ -15,7 +15,9 @@ const GLOBAL_MULTIPLIER = {
   align: 0.8,
   cohesion: 0.3,
   wander: 0.5,
-  maxSpeed: 1.0
+  maxSpeed: 1.0,
+  infectionRatio: 0.01,
+  //healingRate: 0
   //deathRatio: 0.0
 }
 // map of boid ids
@@ -47,16 +49,17 @@ window.onload = function () {
     boids.push(new Boid(random(width), random(height)))
   }
 
-  for (let i = 0; i < HOSPITALS_COUNT; i++) {
-    hospitals.push(new Hospital(random(width), random(height)))
-  }
+ // for (let i = 0; i < HOSPITALS_COUNT; i++) {
+ //   hospitals.push(new Hospital(random(width), random(height)))
+ // }
   
   for (let i = 0; i < INFECTED_COUNT; i++) {
-    boids[i].isInfected = true
+    boids[i].isInfected = true;
   }
   
   for (let i = INFECTED_COUNT; i < INFECTED_COUNT + IMMUNE_COUNT; i++) {
-    boids[i].isRecovered = true
+    boids[i].isRecovered = true;
+
   }
 
 
@@ -64,10 +67,10 @@ window.onload = function () {
   //canvas.addEventListener('click', (e) => {
   //  hospitals.push(new Hospital(e.offsetX, e.offsetY))
   //})
-  ui.addInfectedButton.addEventListener('click', function () {
-    addInfectedBoid();
-    addInfectedBoid();
-  })
+  //ui.addInfectedButton.addEventListener('click', function () {
+  //  addInfectedBoid();
+  //  addInfectedBoid();
+  //})
 
   function animate() {
     ctx.fillStyle = '#000000';
@@ -79,13 +82,15 @@ window.onload = function () {
       boid.applyFlock(boids);
       boid.boundaries();
       boid.spreadInfection(boids);
-      boid.healNaturally(boid);
+      //boid.healNaturally(boid);
 
       boid.visitHospital(hospitals)
       boid.setMaxSpeed(GLOBAL_MULTIPLIER.maxSpeed)
       boid.render(ctx);
 
       if (boid.isDead) STATS.dead[boid.id] = 1;
+      if (boid.isInfected) STATS.infected[boid.id] = 1;
+      if (boid.isRecovered) STATS.recovered[boid.id] = 1;
     }
 
     hospitals.forEach(h => h.render(ctx))

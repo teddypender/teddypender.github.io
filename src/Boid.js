@@ -19,6 +19,7 @@ class Boid {
     this.isDead = false;
     this.deathRatio = GLOBAL_MULTIPLIER.deathRatio; //0.01;
     this.infectionRatio = GLOBAL_MULTIPLIER.infectionRatio; //0.76;
+    this.healingRate = GLOBAL_MULTIPLIER.healingRate; //0.76;
     this.immuneSystemStrength = Math.random(); //rand(0,1);
 
     this.flock = new Flock(this);
@@ -37,9 +38,12 @@ class Boid {
     this.pos.add(this.vel);
     this.deathRatio = GLOBAL_MULTIPLIER.deathRatio;
     this.infectionRatio = GLOBAL_MULTIPLIER.infectionRatio;
+    this.healingRate = GLOBAL_MULTIPLIER.healingRate;
+
     this.acc.mult(0);
 
     this.dying();
+    this.healing();
   }
 
   setMaxSpeed(max) {
@@ -92,13 +96,26 @@ class Boid {
 
   dying() {
     // death ratio
-    if (random(0, 1) < this.deathRatio) {
+    if (random(0,1) < this.deathRatio) {
       if (this.isInfected) {
         this.health -= clamp(0.01, 0, 1);
       }
       if (this.health <= 0) {
         this.isDead = true;
         this.isInfected = false;
+      }
+    }
+  }
+  
+  healing() {
+    // healing ratio
+    if (random(0,1) < this.healingRate) {
+      if (this.isInfected) {
+        this.health += clamp(0.01, 0, 1);
+      }
+      if (this.health >= 1) {
+        this.isInfected = false;
+        this.isRecovered = true;
       }
     }
   }
@@ -194,7 +211,7 @@ class Boid {
   }
   
   healNaturally(boid) {
-    if (boid.isInfected &&  0.7 < this.immuneSystemStrength) {
+    if (boid.isInfected && 0.7 < this.immuneSystemStrength) {
       boid.recover();
       boid.isRecovered = true;
       //this.healed[boid.id] = 1;

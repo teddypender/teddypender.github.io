@@ -7,8 +7,9 @@ class UI {
     this.keepDistanceCheckbox = null;
     this.dontListenGovCheckbox = null;
     this.deathRatio = null;
-    this.addInfectedButton = null;
+    //this.addInfectedButton = null;
     this.infectionRatio = null;
+    this.healingRate = null;
   }
 
   init() {
@@ -21,18 +22,24 @@ class UI {
       this.dontListenGovCheckbox = document.querySelector('#dont-listen');
       this.deathRatio = document.querySelector('#deadliness');
       this.infectionRatio = document.querySelector('#transmissibility');
-      this.addInfectedButton = document.querySelector('#add-infected');
+      this.healingRate = document.querySelector('#healing');
+      //this.addInfectedButton = document.querySelector('#add-infected');
 
       this.keepDistanceCheckbox.addEventListener('input', function () {
         GLOBAL_MULTIPLIER.separateRadius = this.checked ? 10 : 4; // simple if statement with ? :, if checked is true then radius is 10 else 4
       })
       this.deathRatio.addEventListener('mouseup', function () {
-        if (this.value > 1) {
+        if (this.value > -1) {
         GLOBAL_MULTIPLIER.deathRatio = this.value / 100;
         }
       })
+      this.healingRate.addEventListener('mouseup', function () {
+        if (this.value > -1) {
+        GLOBAL_MULTIPLIER.healingRate = this.value / 100;
+        }
+      })
       this.infectionRatio.addEventListener('mouseup', function () {
-        if (this.value > 1) {
+        if (this.value > -1) {
         GLOBAL_MULTIPLIER.infectionRatio = this.value / 100;
         }
       })
@@ -56,6 +63,15 @@ class UI {
         // Update the current slider value (each time you drag the slider handle)
       slider_trans.oninput = function() {
           output_trans.innerHTML = this.value / 100;
+        }
+        
+      var slider_heal = document.getElementById("healing");
+      var output_heal = document.getElementById("demo_heal");
+      output_heal.innerHTML = slider_trans.value; // Display the default slider value
+        
+        // Update the current slider value (each time you drag the slider handle)
+      slider_heal.oninput = function() {
+          output_heal.innerHTML = this.value / 100;
         }
     })
   }
