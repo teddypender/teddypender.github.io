@@ -112,12 +112,11 @@ class Boid {
     if (Math.random() < this.healingRate) {
       if (this.isInfected) {
         this.health += clamp(0.01, 0, 1);
-      }
-      if (this.health >= 1) {
+        if (this.health >= 1) {
         this.isInfected = false;
         this.isRecovered = true;
         delete STATS.infected[this.id];
-
+        }
       }
     }
   }
