@@ -30,7 +30,7 @@ use_authors: true #Set this to false to disable showing post authors
 brand_logo: logo.png
 brand_name: Mamillius
 header: Welcome to Mamillius!
-subheader: Choose a section
+subheader: created by teddy pender
 
 meta_image: odin-meta.png
 
