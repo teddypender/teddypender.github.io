@@ -6,10 +6,10 @@ class UI {
     this.recovered = null;
     this.keepDistanceCheckbox = null;
     this.dontListenGovCheckbox = null;
-    this.deathRatio = null;
+    this.deathRatio = 0.35;
     //this.addInfectedButton = null;
-    this.infectionRatio = null;
-    this.healingRate = null;
+    this.infectionRatio = 0.65;
+    this.healingRate = 0.05;
   }
 
   init() {

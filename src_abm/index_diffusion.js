@@ -16,9 +16,9 @@ const GLOBAL_MULTIPLIER = {
   cohesion: 0.3,
   wander: 0.5,
   maxSpeed: 1.0,
-  infectionRatio: 0.01,
-  //healingRate: 0
-  //deathRatio: 0.0
+  infectionRatio: 0.65,
+  healingRate: 0.05,
+  deathRatio: 0.2
 }
 // map of boid ids
 const STATS = {
