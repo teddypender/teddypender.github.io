@@ -17,6 +17,6 @@ of our reasons to model.
 This model shows 1000 agents in space. 200 are immune (labeled as "Recovered"), 100 are infected and 700 are susceptible. We might think about this as a virus diffusing amongs the agents or a rumor spreading
 amongst a group of people. It is up to you to define how the diffusion occurs. Beware, the parameters are sensitive and can suddenly change the entire state of the model.
 
-Go and play with the model [here](https://teddypender.github.io/sim_index).
+Go and play with the model [here](https://teddypender.github.io/abm_diffusion).
 
 ## More soon.
