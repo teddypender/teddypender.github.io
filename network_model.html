@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Simulation of Diffusion">
-  <meta name="keywords" content="JavaScript,Boids,Flocking,Agents,Behaviors">
+  <meta name="description" content="Simulation of Diffusion On a Network">
+  <meta name="keywords" content="JavaScript,Network,Behaviors">
   <meta name="author" content="Theodore Pender">
 
-  <title>ABM: Diffusion</title>
+  <title>Networks: Diffusion </title>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"
     integrity="sha256-GV8Ae3zupj/zU9Wi2ryJneXgcJlV9+vYCo5CTf5BmGY=" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="./css/style_diffusion.css">
+  <link rel="stylesheet" href="./css/style_diffusion_net.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/3.0.0/pretty-checkbox.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
 
@@ -30,20 +30,6 @@
       <p><span class="dead">Dead</span> <span id="dead">0</span></p>
       <p><span class="recovered">Recovered</span> <span id="recovered">0</span></p>
     </div>
-
-    <section class="checkboxes">
-      <div class="pretty p-default p-round p-smooth">
-        <input id="keep-distance" type="checkbox" />
-        <div class="state p-success">
-          <label for="keep-distance">Social Distancing</label>
-        </div>
-      </div>
-      <div class="pretty p-default p-round p-smooth">
-        <input id="dont-listen" type="checkbox" />
-        <div class="state p-success">
-          <label for="dont-listen">Normal Flocking Behavior</label>
-        </div>
-      </div>
 
      <div class="slidecontainer">
           <input type="range" min="0" max="100" value="35" class="slider" id="deadliness">
@@ -66,13 +52,13 @@
     </section>
   </main>
 
-  <script src="./src_abm/UI.js"></script>
-  <script src="./src_abm/Vector.js"></script>
-  <script src="./src_abm/utils.js"></script>
-  <script src="./src_abm/Hospital.js"></script>
-  <script src="./src_abm/Boid.js"></script>
-  <script src="./src_abm/Flock.js"></script>
-  <script src="./src_abm/index_diffusion.js"></script>
+  <script src="./src_net/UI.js"></script>
+  <script src="./src_net/Vector.js"></script>
+  <script src="./src_net/utils.js"></script>
+  <script src="./src_net/Hospital.js"></script>
+  <script src="./src_net/Boid.js"></script>
+  <script src="./src_net/Flock.js"></script>
+  <script src="./src_net/index_diffusion.js"></script>
 </body>
 
 </html>
