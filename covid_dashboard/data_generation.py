@@ -11,8 +11,13 @@ import io
 import requests
 import yfinance as yf
 import pygsheets
+from functools import reduce
 
 
+"""
+Trump w/ S&P 500
+
+"""
 approval_url = "https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv"
 s = requests.get(approval_url).content
 c = pd.read_csv(io.StringIO(s.decode('utf-8')))
@@ -22,13 +27,13 @@ df_approval = df_approval[df_approval.index >= pd.datetime(2020,1,15)].round(2)
 df_approval.rename({'adjusted_approve' : 'Approval (%)',
                     'adjusted_disapprove' : 'Disapproval (%)'}, axis = 1, inplace = True)
 df_approval.reset_index(inplace = True)
-
+df_approval['Approval (%)'] = df_approval['Approval (%)'] / df_approval['Approval (%)'].iloc[0] * 100
+df_approval['Disapproval (%)'] = df_approval['Disapproval (%)'] / df_approval['Disapproval (%)'].iloc[0] * 100
 
 sp500 = yf.Ticker("^GSPC")
-
 # get historical market data
 df_sp500 = sp500.history(period="max")
-idx = pd.date_range(min(df_approval.DateTime), max(df_approval.DateTime))
+idx = pd.date_range(min(df_sp500.index), max(df_sp500.index))
 
 df_sp500 = df_sp500.reindex(idx)
 df_sp500.ffill(inplace = True)
@@ -41,14 +46,124 @@ df_sp500.rename({'index' : 'DateTime',
 
 df_trump_sp500 = pd.merge(df_approval, df_sp500, on = 'DateTime')
 
+"""
+MSCI Indicators
+
+"""
+
+#MSCI USA IMI Energy Index (FENY)
+#MSCI USA IMI Materials Index (FMAT)
+#MSCI USA IMI Industrials Index (FIDU)
+#MSCI USA IMI Consumer Staples Index (FSTA)
+#MSCI USA IMI Health Care Index (FHLC)
+#MSCI USA IMI Financials Index (FNCL)
+
+
+MSCI_EI = yf.Ticker("FENY")
+MSCI_EI = MSCI_EI.history(period="max")
+idx = pd.date_range(min(MSCI_EI.index), max(MSCI_EI.index))
+MSCI_EI = MSCI_EI.reindex(idx)
+MSCI_EI.ffill(inplace = True)
+MSCI_EI = MSCI_EI[MSCI_EI.index >= pd.datetime(2020,1,15)][['Close']]
+MSCI_EI['Close'] = MSCI_EI['Close'] / MSCI_EI['Close'].iloc[0] * 100
+MSCI_EI = MSCI_EI.round(2)
+MSCI_EI.reset_index(inplace = True)
+MSCI_EI.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Energy Index (FENY)'}, axis = 1, inplace = True)
+
+
+MSCI_MI = yf.Ticker("FMAT")
+MSCI_MI = MSCI_MI.history(period="max")
+idx = pd.date_range(min(MSCI_MI.index), max(MSCI_MI.index))
+MSCI_MI = MSCI_MI.reindex(idx)
+MSCI_MI.ffill(inplace = True)
+MSCI_MI = MSCI_MI[MSCI_MI.index >= pd.datetime(2020,1,15)][['Close']]
+MSCI_MI['Close'] = MSCI_MI['Close'] / MSCI_MI['Close'].iloc[0] * 100
+MSCI_MI = MSCI_MI.round(2)
+MSCI_MI.reset_index(inplace = True)
+MSCI_MI.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Materials Index (FMAT)'}, axis = 1, inplace = True)
+
+
+MSCI_II = yf.Ticker("FIDU")
+MSCI_II = MSCI_II.history(period="max")
+idx = pd.date_range(min(MSCI_II.index), max(MSCI_II.index))
+MSCI_II = MSCI_II.reindex(idx)
+MSCI_II.ffill(inplace = True)
+MSCI_II = MSCI_II[MSCI_II.index >= pd.datetime(2020,1,15)][['Close']]
+MSCI_II['Close'] = MSCI_II['Close'] / MSCI_II['Close'].iloc[0] * 100
+MSCI_II = MSCI_II.round(2)
+MSCI_II.reset_index(inplace = True)
+MSCI_II.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Industrials Index (FIDU)'}, axis = 1, inplace = True)
+
+
+MSCI_CSI = yf.Ticker("FSTA")
+MSCI_CSI = MSCI_CSI.history(period="max")
+idx = pd.date_range(min(MSCI_CSI.index), max(MSCI_CSI.index))
+MSCI_CSI = MSCI_CSI.reindex(idx)
+MSCI_CSI.ffill(inplace = True)
+MSCI_CSI = MSCI_CSI[MSCI_CSI.index >= pd.datetime(2020,1,15)][['Close']]
+MSCI_CSI['Close'] = MSCI_CSI['Close'] / MSCI_CSI['Close'].iloc[0] * 100
+MSCI_CSI = MSCI_CSI.round(2)
+MSCI_CSI.reset_index(inplace = True)
+MSCI_CSI.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Consumer Staples Index (FSTA)'}, axis = 1, inplace = True)
+
+
+MSCI_HCI = yf.Ticker("FHLC")
+MSCI_HCI = MSCI_HCI.history(period="max")
+idx = pd.date_range(min(MSCI_HCI.index), max(MSCI_HCI.index))
+MSCI_HCI = MSCI_HCI.reindex(idx)
+MSCI_HCI.ffill(inplace = True)
+MSCI_HCI = MSCI_HCI[MSCI_HCI.index >= pd.datetime(2020,1,15)][['Close']] 
+MSCI_HCI['Close'] = MSCI_HCI['Close'] / MSCI_HCI['Close'].iloc[0] * 100
+MSCI_HCI = MSCI_HCI.round(2)
+MSCI_HCI.reset_index(inplace = True)
+MSCI_HCI.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Health Care Index (FHLC)'}, axis = 1, inplace = True)
+
+
+MSCI_FI = yf.Ticker("FNCL")
+MSCI_FI = MSCI_FI.history(period="max")
+idx = pd.date_range(min(MSCI_FI.index), max(MSCI_FI.index))
+MSCI_FI = MSCI_FI.reindex(idx)
+MSCI_FI.ffill(inplace = True)
+MSCI_FI = MSCI_FI[MSCI_FI.index >= pd.datetime(2020,1,15)][['Close']] 
+MSCI_FI['Close'] = MSCI_FI['Close'] / MSCI_FI['Close'].iloc[0] * 100
+MSCI_FI = MSCI_FI.round(2)
+MSCI_FI.reset_index(inplace = True)
+MSCI_FI.rename({'index' : 'DateTime',
+                 'Close' : 'MSCI USA IMI Financials Index (FNCL)'}, axis = 1, inplace = True)
+
+dfIndexList = [MSCI_EI, MSCI_MI, MSCI_II, MSCI_CSI, MSCI_HCI, MSCI_FI]
+MSCI_df = reduce(lambda x, y: pd.merge(x, y, on = 'DateTime'), dfIndexList)
+
+"""
+Coronavirus cases
+
+"""
+covid19_url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
+
+
+
+
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
 
 #open the google spreadsheet (where 'COVID Dashboard' is the name of my sheet)
 sh = gc.open('COVID Dashboard')
 
-#select the first sheet 
-wks = sh[0]
+#add worksheets
+sh.add_worksheet('Sheet2')
 
-#update the first sheet with df, starting at cell B2. 
-wks.set_dataframe(df_trump_sp500,(1,1))
+#select the sheet 
+wks_trump_sp500 = sh[0]
+wks_msci_inx = sh[1]
+
+#update the sheets with the dataframes. 
+wks_trump_sp500.set_dataframe(df_trump_sp500,(1,1))
+wks_msci_inx.set_dataframe(MSCI_df,(1,1))
+
+
+
