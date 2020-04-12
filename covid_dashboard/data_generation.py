@@ -164,7 +164,7 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-sh.add_worksheet('Sheet3')
+#sh.add_worksheet('Sheet3')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
