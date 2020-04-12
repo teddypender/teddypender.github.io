@@ -708,7 +708,12 @@ var VolSASBCat = new Highcharts.Chart({
 });
 </script></div><p class="paragraph-3 summary">Description (3).<br/></p></div>
 
-<div id="w-node-7248068c4357-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">Relative COVID-19 volume and Confirmed Cases<br/></h2><div data-duration-in="300" data-duration-out="100" class="w-tabs"><div class="w-tab-menu"><a data-w-tab="Tab 1" class="tab-2 w-inline-block w-tab-link w--current"><div>US</div></a><a data-w-tab="Tab 2" class="tab-2 w-inline-block w-tab-link"><div class="text-block-11">China</div></a><a data-w-tab="Tab 3" class="tab-2 w-inline-block w-tab-link"><div class="text-block-12">Europe</div></a></div><div class="w-tab-content"><div data-w-tab="Tab 1" class="w-tab-pane w--tab-active"><div class="html-embed w-embed w-script"><div id="RatioUs"></div>
+<div id="w-node-7248068c4357-415dff4a" class="neumorphic compact">
+<h2 class="chart-header bottom-border">Relative COVID-19 volume and Confirmed Cases<br/></h2>
+<div data-duration-in="300" data-duration-out="100" class="w-tabs">
+<div class="w-tab-menu"><a data-w-tab="Tab 1" class="tab-2 w-inline-block w-tab-link w--current"><div>US</div></a>
+</div>
+<div class="w-tab-content"><div data-w-tab="Tab 1" class="w-tab-pane w--tab-active"><div class="html-embed w-embed w-script"><div id="RatioUs"></div>
 <script type="text/javascript">
 var RatioUs = new Highcharts.Chart({
 	colors: ['#a446f6', '#af98d0', 'rgba(150,150,150,.5)'],
@@ -718,8 +723,7 @@ var RatioUs = new Highcharts.Chart({
   },
 	 data: {
     googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
-    googleSpreadsheetWorksheet: 3,
-    switchRowsAndColumns: true
+    googleSpreadsheetWorksheet: 3
   },
   "series": [
     {
@@ -782,152 +786,6 @@ var RatioUs = new Highcharts.Chart({
       }
     }
 });
-
-/*
-</script></div></div><div data-w-tab="Tab 2" class="w-tab-pane"><div class="html-embed w-embed w-script"><div id="RatioChina"></div>
-<script type="text/javascript">
-var RatioChina = new Highcharts.Chart({
-	colors: ['#a446f6', '#af98d0', 'rgba(150,150,150,.5)'],
-	"chart": {
-  	renderTo: 'RatioChina',
-    "polar": false,
-    spacing: [25, 10, 30, 10],
-  },
-	 data: {
-    googleSpreadsheetKey: a78910140,
-    googleSpreadsheetWorksheet: 5,
-    switchRowsAndColumns: true
-  },
-  "series": [
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'column',
-      zIndex: -1,
-      yAxis: 1,
-      borderColor: 'transparent'
-    }
-  ],
-  yAxis: [{
-  			gridLineColor: 'rgba(150,150,150,.2)',
-        opposite: true,
-        max: 800000,
-    }, {
-    		gridLineColor: 'transparent',
-        max: 80,
-        labels: {
-            formatter: function() {
-              return this.value+"%";
-            },
-        },
-    }, {
-    		gridLineColor: 'transparent',
-  }],
-  credits: {
-      text: 'Truvalue Labs, Johns Hopkins University',
-      href: ''
-  },
-  title: {
-      text: 'Relative COVID-19 volume and Confirmed Cases - China',
-        style: { 
-          color: '#fff',
-          fontFamily : 'Barlow, sans-serif',
-            fontWeight: '600'
-        },
-      align: 'left'
-  },
-  plotOptions: {
-        area: {
-            lineWidth: 1,
-            marker: {
-                lineWidth: 1,
-            },
-        }
-    },
-    exporting: {
-    	chartOptions: {
-      	credits: {
-                enabled: true,
-        },
-      }
-    }
-});
-
-</script></div></div><div data-w-tab="Tab 3" class="w-tab-pane"><div class="html-embed w-embed w-script"><div id="RatioEurope"></div>
-<script type="text/javascript">
-var RatioEurope = new Highcharts.Chart({
-	colors: ['#a446f6', '#af98d0', 'rgba(150,150,150,.5)'],
-	"chart": {
-  	renderTo: 'RatioEurope',
-    "polar": false,
-    spacing: [25, 10, 30, 10],
-  },
-	 data: {
-    googleSpreadsheetKey: a78910140,
-    googleSpreadsheetWorksheet: 6,
-    switchRowsAndColumns: true
-  },
-  "series": [
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'column',
-      zIndex: -1,
-      yAxis: 1,
-      borderColor: 'transparent'
-    }
-  ],
-  yAxis: [{
-  			gridLineColor: 'rgba(150,150,150,.2)',
-        opposite: true,
-    }, {
-    		gridLineColor: 'transparent',
-        labels: {
-            formatter: function() {
-              return this.value+"%";
-            },
-        },
-    }, {
-    		gridLineColor: 'transparent',
-  }],
-  credits: {
-      text: 'Truvalue Labs, Johns Hopkins University',
-      href: ''
-  },
-  title: {
-      text: 'Relative COVID-19 volume and Confirmed Cases - Europe',
-        style: { 
-          color: '#fff',
-          fontFamily : 'Barlow, sans-serif',
-            fontWeight: '600'
-        },
-      align: 'left'
-  },
-  plotOptions: {
-        area: {
-            lineWidth: 1,
-            marker: {
-                lineWidth: 1,
-            },
-        }
-    },
-    exporting: {
-    	chartOptions: {
-      	credits: {
-                enabled: true,
-        },
-      }
-    }
-});
-*/
 
 </script></div></div></div></div><p class="paragraph-3 summary">Description (4).</p></div><div id="w-node-7fef1527260b-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">Truvalue Labs COVID-19 Signal Sentiment by Region<br/></h2><div data-duration-in="300" data-duration-out="100" class="w-tabs"><div class="w-tab-menu"><a data-w-tab="Tab 1" class="tab-2 w-inline-block w-tab-link w--current"><div>Latest</div></a><a data-w-tab="Tab 2" class="tab-2 w-inline-block w-tab-link"><div class="text-block-11">Week Prior</div></a></div><div class="w-tab-content"><div data-w-tab="Tab 1" class="w-tab-pane w--tab-active"><div class="html-embed chart w-embed w-script"><div id="CovidSentimentByRegion"></div>
 <script type="text/javascript">
