@@ -18,18 +18,34 @@ from functools import reduce
 Trump w/ S&P 500
 
 """
-approval_url = "https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv"
+#approval_url = "https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv"
 # "https://projects.fivethirtyeight.com/polls-page/president_polls.csv"
-s = requests.get(approval_url).content
+#s = requests.get(approval_url).content
+#c = pd.read_csv(io.StringIO(s.decode('utf-8')))
+#c['DateTime'] = [pd.datetime(a[0], a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['enddate']]]
+#df_approval = c.groupby(['DateTime']).median()[['adjusted_approve', 'adjusted_disapprove']]
+#df_approval = df_approval[df_approval.index >= pd.datetime(2020,1,15)].round(2)
+#df_approval.rename({'adjusted_approve' : 'Approval (%)',
+#                    'adjusted_disapprove' : 'Disapproval (%)'}, axis = 1, inplace = True)
+#df_approval.reset_index(inplace = True)
+#df_approval['Approval (%)'] = df_approval['Approval (%)'] / df_approval['Approval (%)'].iloc[0] * 100
+#df_approval['Disapproval (%)'] = df_approval['Disapproval (%)'] / df_approval['Disapproval (%)'].iloc[0] * 100
+
+trump_poll = "https://projects.fivethirtyeight.com/polls-page/president_polls.csv"
+s = requests.get(trump_poll).content
 c = pd.read_csv(io.StringIO(s.decode('utf-8')))
-c['DateTime'] = [pd.datetime(a[0], a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['enddate']]]
-df_approval = c.groupby(['DateTime']).median()[['adjusted_approve', 'adjusted_disapprove']]
-df_approval = df_approval[df_approval.index >= pd.datetime(2020,1,15)].round(2)
-df_approval.rename({'adjusted_approve' : 'Approval (%)',
-                    'adjusted_disapprove' : 'Disapproval (%)'}, axis = 1, inplace = True)
-df_approval.reset_index(inplace = True)
-df_approval['Approval (%)'] = df_approval['Approval (%)'] / df_approval['Approval (%)'].iloc[0] * 100
-df_approval['Disapproval (%)'] = df_approval['Disapproval (%)'] / df_approval['Disapproval (%)'].iloc[0] * 100
+c = c[(c.stage == 'general') & (c.answer.isin(['Biden', 'Trump']))]
+c['DateTime'] = [pd.datetime(int('20' + str(a[0])), a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['end_date']]]
+df_polling = c.groupby(['DateTime', 'answer']).median()[['pct']]
+df_polling.reset_index(inplace = True)
+df_polling = df_polling[df_polling.DateTime >= pd.datetime(2020,1,15)].round(2)
+df_polling = df_polling.pivot(index='DateTime', columns = 'answer', values = 'pct')
+df_polling.ffill(inplace = True)
+df_polling.bfill(inplace = True)
+df_polling.rename({'Biden' : 'Biden Poll (%)',
+                    'Trump' : 'Trump Poll (%)'}, axis = 1, inplace = True)
+df_polling['Biden Poll (%)'] = df_polling['Biden Poll (%)'] / df_polling['Biden Poll (%)'].iloc[0] * 100
+df_polling['Trump Poll (%)'] = df_polling['Trump Poll (%)'] / df_polling['Trump Poll (%)'].iloc[0] * 100
 
 sp500 = yf.Ticker("^GSPC")
 # get historical market data
@@ -46,7 +62,7 @@ df_sp500.reset_index(inplace = True)
 df_sp500.rename({'index' : 'DateTime',
                  'Close' : 'S&P 500 (re-based to 100 at 1/15/20)'}, axis = 1, inplace = True)
 
-df_trump_sp500 = pd.merge(df_approval, df_sp500, on = 'DateTime')
+df_trump_sp500 = pd.merge(df_polling, df_sp500, on = 'DateTime')
 
 """
 MSCI Indicators
@@ -154,7 +170,7 @@ df_COVID['New Cases'] = df_COVID['cases'].diff().fillna(0)
 df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
 
 df_COVID.rename({'cases' : 'Total Cases'}, axis = 1, inplace = True)
-df_COVID = df_COVID[['Total Cases', 'New Cases', 'Death Rate']].reset_index().round(2)
+df_COVID = df_COVID[['Total Cases', 'New Cases', 'Death Rate (%)']].reset_index().round(2)
 
 
 #authorization
