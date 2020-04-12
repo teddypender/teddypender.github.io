@@ -42,7 +42,7 @@ df_sp500.rename({'index' : 'DateTime',
 df_trump_sp500 = pd.merge(df_approval, df_sp500, on = 'DateTime')
 
 #authorization
-gc = pygsheets.authorize(service_file='/Users/theodorepender/Documents/Github/teddypender.github.io/covid_dashboard/covid19-dashboard-274000-97b3f9900832.json')
+gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
 
 #open the google spreadsheet (where 'COVID Dashboard' is the name of my sheet)
 sh = gc.open('COVID Dashboard')
