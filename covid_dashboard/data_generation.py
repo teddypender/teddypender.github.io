@@ -19,6 +19,7 @@ Trump w/ S&P 500
 
 """
 approval_url = "https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv"
+# "https://projects.fivethirtyeight.com/polls-page/president_polls.csv"
 s = requests.get(approval_url).content
 c = pd.read_csv(io.StringIO(s.decode('utf-8')))
 c['DateTime'] = [pd.datetime(a[0], a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['enddate']]]
@@ -145,8 +146,15 @@ Coronavirus cases
 
 """
 covid19_url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
+covid_cases = requests.get(covid19_url).content
+df_COVID = pd.read_csv(io.StringIO(covid_cases.decode('utf-8')))
+df_COVID['DateTime'] = [pd.datetime(a[2], a[1], a[0]) for a in [[int(y) for  y in x.split('-')][::-1] for x in df_COVID['date']]]
+df_COVID = df_COVID.groupby('DateTime').sum()[['cases', 'deaths']]
+df_COVID['New Cases'] = df_COVID['cases'].diff().fillna(0)
+df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
 
-
+df_COVID.rename({'cases' : 'Total Cases'}, axis = 1, inplace = True)
+df_COVID = df_COVID[['Total Cases', 'New Cases', 'Death Rate']].reset_index().round(2)
 
 
 #authorization
@@ -156,15 +164,17 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-#sh.add_worksheet('Sheet2')
+sh.add_worksheet('Sheet3')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
 wks_msci_inx = sh[1]
+wks_covid_cases = sh[2]
 
 #update the sheets with the dataframes. 
 wks_trump_sp500.set_dataframe(df_trump_sp500,(1,1))
 wks_msci_inx.set_dataframe(MSCI_df,(1,1))
+wks_covid_cases.set_dataframe(df_COVID,(1,1))
 
 
 
