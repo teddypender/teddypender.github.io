@@ -38,7 +38,8 @@ idx = pd.date_range(min(df_sp500.index), max(df_sp500.index))
 df_sp500 = df_sp500.reindex(idx)
 df_sp500.ffill(inplace = True)
 
-df_sp500 = df_sp500[df_sp500.index >= pd.datetime(2020,1,15)][['Close']] /df_sp500['Close'].iloc[0] * 100
+df_sp500 = df_sp500[df_sp500.index >= pd.datetime(2020,1,15)][['Close']] 
+df_sp500['Close'] = df_sp500['Close'] / df_sp500['Close'].iloc[0] * 100
 df_sp500 = df_sp500.round(2)
 df_sp500.reset_index(inplace = True)
 df_sp500.rename({'index' : 'DateTime',
@@ -155,7 +156,7 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-sh.add_worksheet('Sheet2')
+#sh.add_worksheet('Sheet2')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
