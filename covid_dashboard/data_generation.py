@@ -181,6 +181,38 @@ df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
 df_COVID.rename({'cases' : 'Total Cases'}, axis = 1, inplace = True)
 df_COVID = df_COVID[['Total Cases', 'New Cases', 'Death Rate (%)']].reset_index().round(2)
 
+"""
+VIX Percentage Change
+"""
+
+VIX = yf.Ticker("^VIX")
+VIX = VIX.history(period="max")
+idx = pd.date_range(min(VIX.index), max(VIX.index))
+VIX = VIX.reindex(idx)
+VIX.ffill(inplace = True)
+VIX['Close'] = VIX['Close'].pct_change() * 100
+VIX = VIX[VIX.index >= pd.datetime(2020,1,15)][['Close']] 
+VIX = VIX.round(2)
+VIX.reset_index(inplace = True)
+VIX.rename({'index' : 'DateTime',
+                 'Close' : 'CBOE Volatility Index (VIX)'}, axis = 1, inplace = True)
+
+"""
+Brent Crude WTI Weekly Change
+"""
+
+BZ = yf.Ticker("BZ=F")
+BZ = BZ.history(period="max")
+idx = pd.date_range(min(BZ.index), max(BZ.index))
+BZ = BZ.reindex(idx)
+BZ.ffill(inplace = True)
+BZ['Close'] = BZ['Close'].pct_change() * 100
+BZ = BZ[BZ.index >= pd.datetime(2020,1,15)][['Close']] 
+BZ = BZ.round(2)
+BZ.reset_index(inplace = True)
+BZ.rename({'index' : 'DateTime',
+                 'Close' : 'Brent Crude Oil Last Day Financ (BZ=F)'}, axis = 1, inplace = True)
+
 
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
@@ -189,12 +221,13 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-#sh.add_worksheet('Sheet3')
+sh.add_worksheet('Sheet4')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
 wks_msci_inx = sh[1]
 wks_covid_cases = sh[2]
+wks_vix = sh[3]
 
 #update the sheets with the dataframes. 
 wks_trump_sp500.set_dataframe(df_polls_sp500,(1,1))
