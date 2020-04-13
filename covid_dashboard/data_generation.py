@@ -38,14 +38,23 @@ c = c[(c.stage == 'general') & (c.answer.isin(['Biden', 'Trump']))]
 c['DateTime'] = [pd.datetime(int('20' + str(a[0])), a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['end_date']]]
 df_polling = c.groupby(['DateTime', 'answer']).median()[['pct']]
 df_polling.reset_index(inplace = True)
-df_polling = df_polling[df_polling.DateTime >= pd.datetime(2020,1,15)].round(2)
+df_polling = df_polling[df_polling.DateTime >= pd.datetime(2020,1,1)].round(2)
 df_polling = df_polling.pivot(index='DateTime', columns = 'answer', values = 'pct')
+idx = pd.date_range(min(df_polling.index), max(df_polling.index))
+df_polling = df_polling.reindex(idx)
 df_polling.ffill(inplace = True)
 df_polling.bfill(inplace = True)
+df_polling['Biden'] = df_polling['Biden'].rolling(window = 7).mean()
+df_polling['Trump'] = df_polling['Trump'].rolling(window = 7).mean()
+df_polling = df_polling[df_polling.index >= pd.datetime(2020,1,15)].round(2)
 df_polling.rename({'Biden' : 'Biden Poll (%)',
                     'Trump' : 'Trump Poll (%)'}, axis = 1, inplace = True)
 df_polling['Biden Poll (%)'] = df_polling['Biden Poll (%)'] / df_polling['Biden Poll (%)'].iloc[0] * 100
 df_polling['Trump Poll (%)'] = df_polling['Trump Poll (%)'] / df_polling['Trump Poll (%)'].iloc[0] * 100
+
+
+df_polling.reset_index(inplace = True)
+df_polling.rename({'index' : 'DateTime'}, axis = 1, inplace = True)
 
 sp500 = yf.Ticker("^GSPC")
 # get historical market data
@@ -55,14 +64,14 @@ idx = pd.date_range(min(df_sp500.index), max(df_sp500.index))
 df_sp500 = df_sp500.reindex(idx)
 df_sp500.ffill(inplace = True)
 
-df_sp500 = df_sp500[df_sp500.index >= pd.datetime(2020,1,15)][['Close']] 
+df_sp500 = df_sp500[(df_sp500.index >= pd.datetime(2020,1,15)) & (df_sp500.index <= max(df_polling.DateTime))][['Close']] 
 df_sp500['Close'] = df_sp500['Close'] / df_sp500['Close'].iloc[0] * 100
 df_sp500 = df_sp500.round(2)
 df_sp500.reset_index(inplace = True)
 df_sp500.rename({'index' : 'DateTime',
                  'Close' : 'S&P 500 (re-based to 100 at 1/15/20)'}, axis = 1, inplace = True)
 
-df_trump_sp500 = pd.merge(df_polling, df_sp500, on = 'DateTime')
+df_polls_sp500 = pd.merge(df_polling, df_sp500, on = 'DateTime')
 
 """
 MSCI Indicators
@@ -188,7 +197,7 @@ wks_msci_inx = sh[1]
 wks_covid_cases = sh[2]
 
 #update the sheets with the dataframes. 
-wks_trump_sp500.set_dataframe(df_trump_sp500,(1,1))
+wks_trump_sp500.set_dataframe(df_polls_sp500,(1,1))
 wks_msci_inx.set_dataframe(MSCI_df,(1,1))
 wks_covid_cases.set_dataframe(df_COVID,(1,1))
 
