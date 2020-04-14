@@ -226,6 +226,7 @@ df_COVID['DateTime'] = [pd.datetime(a[2], a[1], a[0]) for a in [[int(y) for  y i
 
 df_COVID['Region'] = [region_dict[x] for x in df_COVID.state]
 df_COVID_Region = df_COVID.groupby(['DateTime', 'Region']).sum()
+df_COVID_Region = df_COVID_Region[df_COVID_Region.index.get_level_values('DateTime') >= pd.datetime(2020,3,1)]
 df_COVID_Region_PCT = df_COVID_Region[['cases']].groupby(level=0).apply(lambda x: 100 * x / x.sum()).fillna(0).round(2).reset_index()
 df_COVID_Region_PCT.rename({'cases' : 'Cases'}, axis = 1, inplace = True)
 df_COVID_Region_PCT = df_COVID_Region_PCT.pivot(index='DateTime', columns = 'Region', values = 'Cases').fillna(0).reset_index()
