@@ -287,13 +287,19 @@ for series in json_data['Results']['series']:
         data.append([year, period, value])
         
 Unemployment_df = pd.DataFrame(data = data, columns = ['Year', 'M', 'Unemployment Rate'])
+Unemployment_df['Unemployment Rate'] = Unemployment_df['Unemployment Rate'].astype(float)
 month = {'M01': '1','M02': '2','M03': '3','M04': '4','M05': '5','M06': '6','M07': '7','M08': '8','M09': '9','M10': '10','M11': '11','M12': '12'}
 day = {'M01': '15','M02': '15','M03': '15','M04': '15','M05': '15','M06': '15','M07': '15','M08': '15','M09': '15','M10': '15','M11': '15','M12': '15'}
 Unemployment_df['Year'] = Unemployment_df['Year'].astype(int)
 Unemployment_df['month'] = [int(month[x]) for x in Unemployment_df.M]
 Unemployment_df['day'] = [int(day[x]) for x in Unemployment_df.M]
 Unemployment_df['DateTime'] = [pd.datetime(x,y,z) for x,y,z in zip(list(Unemployment_df.Year), list(Unemployment_df.month), list(Unemployment_df.day))]
-Unemployment_df = Unemployment_df[['DateTime', 'Unemployment Rate']]
+Unemployment_df_change = Unemployment_df[::-1].copy()
+Unemployment_df = Unemployment_df[['DateTime', 'Unemployment Rate']][:-7][::-1]
+Unemployment_df_change['Unemployment Rate Change'] = Unemployment_df_change['Unemployment Rate'].pct_change().fillna(0).round(4) * 100
+Unemployment_df_change = Unemployment_df_change[['DateTime', 'Unemployment Rate Change']][-7:]
+Unemployment_df.rename({'Unemployment Rate' : 'Unemployment Rate (%)'}, axis = 1, inplace = True)
+Unemployment_df_change.rename({'Unemployment Rate Change' : 'Unemployment Rate Change (%)'}, axis = 1, inplace = True)
 
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
@@ -302,7 +308,7 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-#sh.add_worksheet('Sheet7')
+#sh.add_worksheet('Sheet8')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
@@ -311,6 +317,7 @@ wks_covid_cases = sh[2]
 wks_vix = sh[3]
 wks_region = sh[4]
 wks_unemployment = sh[5]
+wk_unemployment_change = sh[6]
 
 #update the sheets with the dataframes. 
 wks_trump_sp500.set_dataframe(df_polls_sp500,(1,1))
@@ -319,5 +326,7 @@ wks_covid_cases.set_dataframe(df_COVID,(1,1))
 wks_vix.set_dataframe(VIX,(1,1))
 wks_region.set_dataframe(df_COVID_Region_PCT,(1,1))
 wks_unemployment.set_dataframe(Unemployment_df,(1,1))
+wk_unemployment_change.set_dataframe(Unemployment_df_change,(1,1))
+
 
 
