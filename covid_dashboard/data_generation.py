@@ -12,24 +12,13 @@ import requests
 import yfinance as yf
 import pygsheets
 from functools import reduce
-
-
-"""
-Trump w/ S&P 500
+import requests
+import json
 
 """
-#approval_url = "https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv"
-# "https://projects.fivethirtyeight.com/polls-page/president_polls.csv"
-#s = requests.get(approval_url).content
-#c = pd.read_csv(io.StringIO(s.decode('utf-8')))
-#c['DateTime'] = [pd.datetime(a[0], a[2], a[1]) for a in [[int(y) for  y in x.split('/')][::-1] for x in c['enddate']]]
-#df_approval = c.groupby(['DateTime']).median()[['adjusted_approve', 'adjusted_disapprove']]
-#df_approval = df_approval[df_approval.index >= pd.datetime(2020,1,15)].round(2)
-#df_approval.rename({'adjusted_approve' : 'Approval (%)',
-#                    'adjusted_disapprove' : 'Disapproval (%)'}, axis = 1, inplace = True)
-#df_approval.reset_index(inplace = True)
-#df_approval['Approval (%)'] = df_approval['Approval (%)'] / df_approval['Approval (%)'].iloc[0] * 100
-#df_approval['Disapproval (%)'] = df_approval['Disapproval (%)'] / df_approval['Disapproval (%)'].iloc[0] * 100
+Trump & Biden w/ S&P 500
+
+"""
 
 trump_poll = "https://projects.fivethirtyeight.com/polls-page/president_polls.csv"
 s = requests.get(trump_poll).content
@@ -170,10 +159,76 @@ MSCI_df = reduce(lambda x, y: pd.merge(x, y, on = 'DateTime'), dfIndexList)
 Coronavirus cases
 
 """
+
+region_dict = {
+    'Alabama': 'South',
+    'Alaska': 'West',
+    'American Samoa' : 'West',
+    'Arizona':'West',
+    'Arkansas':'South',
+    'California': 'West',
+    'Colorado':'West',
+    'Connecticut':'Northeast',
+    'Delaware':'South',
+    'District of Columbia' : 'South',
+    'Florida': 'South',
+    'Georgia': 'South',
+    'Guam' : 'West',
+    'Hawaii': 'West',
+    'Idaho': 'West',
+    'Illinois': 'Midwest',
+    'Indiana': 'Midwest',
+    'Iowa': 'Midwest',
+    'Kansas': 'Midwest',
+    'Kentucky': 'South',
+    'Louisiana': 'South',
+    'Maine': 'Northeast',
+    'Maryland': 'South',
+    'Massachusetts': 'Northeast',
+    'Michigan': 'Midwest',
+    'Minnesota': 'Midwest',
+    'Mississippi': 'South',
+    'Missouri': 'Midwest',
+    'Montana': 'West',
+    'Nebraska': 'Midwest',
+    'Nevada': 'West',
+    'New Hampshire': 'Northeast',
+    'New Jersey': 'Northeast',
+    'New Mexico': 'West',
+    'New York': 'Northeast',
+    'North Carolina': 'South',
+    'North Dakota': 'Midwest',
+    'Northern Mariana Islands' : 'West',
+    'Ohio': 'Midwest',
+    'Oklahoma': 'South',
+    'Oregon': 'West',
+    'Pennsylvania': 'Northeast',
+    'Puerto Rico' : 'South',
+    'Rhode Island': 'Northeast',
+    'South Carolina': 'South',
+    'South Dakota': 'Midwest',
+    'Tennessee': 'South',
+    'Texas': 'South',
+    'Utah': 'West',
+    'Vermont': 'Northeast',
+    'Virgin Islands' : 'South',
+    'Virginia': 'South',
+    'Washington': 'West',
+    'West Virginia': 'South',
+    'Wisconsin': 'Midwest',
+    'Wyoming': 'West'  
+}
+
 covid19_url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
 covid_cases = requests.get(covid19_url).content
 df_COVID = pd.read_csv(io.StringIO(covid_cases.decode('utf-8')))
 df_COVID['DateTime'] = [pd.datetime(a[2], a[1], a[0]) for a in [[int(y) for  y in x.split('-')][::-1] for x in df_COVID['date']]]
+
+df_COVID['Region'] = [region_dict[x] for x in df_COVID.state]
+df_COVID_Region = df_COVID.groupby(['DateTime', 'Region']).sum()
+df_COVID_Region_PCT = df_COVID_Region[['cases']].groupby(level=0).apply(lambda x: 100 * x / x.sum()).fillna(0).round(2).reset_index()
+df_COVID_Region_PCT.rename({'cases' : 'Cases'}, axis = 1, inplace = True)
+
 df_COVID = df_COVID.groupby('DateTime').sum()[['cases', 'deaths']]
 df_COVID['New Cases'] = df_COVID['cases'].diff().fillna(0)
 df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
@@ -213,6 +268,32 @@ BZ.reset_index(inplace = True)
 BZ.rename({'index' : 'DateTime',
                  'Close' : 'Brent Crude Oil Last Day Financ (BZ=F)'}, axis = 1, inplace = True)
 
+"""
+Unemployment
+Unemployment Rate (Seasonally Adjusted) - LNS14000000
+"""
+
+headers = {'Content-type': 'application/json'}
+data = json.dumps({"seriesid": ['LNS14000000'],"startyear":"2019", "endyear":"2020"})
+p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+
+json_data = json.loads(p.text)
+data = []
+for series in json_data['Results']['series']:
+    for item in series['data']:
+        year = item['year']
+        period = item['period']
+        value = item['value']
+        data.append([year, period, value])
+        
+Unemployment_df = pd.DataFrame(data = data, columns = ['Year', 'M', 'Unemployment Rate'])
+month = {'M01': '1','M02': '2','M03': '3','M04': '4','M05': '5','M06': '6','M07': '7','M08': '8','M09': '9','M10': '10','M11': '11','M12': '12'}
+day = {'M01': '15','M02': '15','M03': '15','M04': '15','M05': '15','M06': '15','M07': '15','M08': '15','M09': '15','M10': '15','M11': '15','M12': '15'}
+Unemployment_df['Year'] = Unemployment_df['Year'].astype(int)
+Unemployment_df['month'] = [int(month[x]) for x in Unemployment_df.M]
+Unemployment_df['day'] = [int(day[x]) for x in Unemployment_df.M]
+Unemployment_df['DateTime'] = [pd.datetime(x,y,z) for x,y,z in zip(list(Unemployment_df.Year), list(Unemployment_df.month), list(Unemployment_df.day))]
+Unemployment_df = Unemployment_df[['DateTime', 'Unemployment Rate']]
 
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
@@ -221,18 +302,22 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-sh.add_worksheet('Sheet4')
+#sh.add_worksheet('Sheet7')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
 wks_msci_inx = sh[1]
 wks_covid_cases = sh[2]
 wks_vix = sh[3]
+wks_region = sh[4]
+wks_unemployment = sh[5]
 
 #update the sheets with the dataframes. 
 wks_trump_sp500.set_dataframe(df_polls_sp500,(1,1))
 wks_msci_inx.set_dataframe(MSCI_df,(1,1))
 wks_covid_cases.set_dataframe(df_COVID,(1,1))
-
+wks_vix.set_dataframe(VIX,(1,1))
+wks_region.set_dataframe(df_COVID_Region_PCT,(1,1))
+wks_unemployment.set_dataframe(Unemployment_df,(1,1))
 
 
