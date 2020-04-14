@@ -236,6 +236,8 @@ df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
 
 df_COVID.rename({'cases' : 'Total Cases'}, axis = 1, inplace = True)
 df_COVID = df_COVID[['Total Cases', 'New Cases', 'Death Rate (%)']].reset_index().round(2)
+df_COVID = df_COVID[df_COVID.DateTime >= pd.datetime(2020,3,1)]
+
 
 """
 VIX Percentage Change
@@ -355,6 +357,13 @@ sh = gc.open('COVID Dashboard')
 
 #add worksheets
 #sh.add_worksheet('Sheet15')
+
+#get last update time
+last_update = gc.drive.get_update_time('1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU')[0:10].split('-')
+last_update = pd.datetime(int(last_update[0]),int(last_update[1]), int(last_update[2]))
+
+date_time = last_update.strftime("%A, %B %dth")
+print("date: ", date_time)
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
