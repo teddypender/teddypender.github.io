@@ -883,16 +883,101 @@ var USBoLS2 = new Highcharts.Chart({
 
 </script></div></div></div></div>
 
-<p class="paragraph-3 summary">Description (5). <br/></p></div><div id="w-node-d340ee94ac51-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">Truvalue Labs COVID-19 Economy Signal Volume by Region<br/></h2><div class="html-embed chart w-embed w-script"><div id="EconomyTotalSASBVol"></div>
+<p class="paragraph-3 summary">Description (5). <br/></p></div>
+
+<div id="w-node-d340ee94ac51-415dff4a" class="neumorphic compact">
+<!-- 
+ <h2 class="chart-header bottom-border">Housing Indicators<br/></h2>
+  <div class="html-embed chart w-embed w-script"><div id="RentalEconomy"></div>
+  -->
+ <h2 class="chart-header bottom-border">U.S. Housing Indicators<br /></h2>
+  <div data-duration-in="300" data-duration-out="100" class="w-tabs">
+    <div class="w-tab-menu"><a data-w-tab="Tab 1" class="tab-2 w-inline-block w-tab-link w--current">
+        <div>Top Tier Property Value Change</div>
+      </a><a data-w-tab="Tab 2" class="tab-2 w-inline-block w-tab-link">
+        <div class="text-block-11">Bottom Tier Property Value Change</div>
+      </a></div>
+    <div class="w-tab-content">
+      <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+        <div class="html-embed chart w-embed w-script">
+          <div id="RentalEconomy"></div>
 <script type="text/javascript">
-var EconomyTotalSASBVol = new Highcharts.Chart({
+var RentalEconomy = new Highcharts.Chart({
+	 colors : ['#FFF3A5'],
+	 chart: {	 
+  	renderTo: 'RentalEconomy',
+    type: 'column',
+    marginBottom: 220,
+  },
+	 data: {
+    googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
+    googleSpreadsheetWorksheet: 11
+  },
+  credits: {
+      text: 'Zillow',
+      href: ''
+  },
+  title: {
+      text: 'Top Tier Value Change',
+  },
+  yAxis: {
+    labels: {
+      formatter: function() {
+         return this.value+"%";
+    	},
+  	}
+  },
+  tooltip: {
+  	valueSuffix: "",
+  }
+});
+
+</script></div></div><div data-w-tab="Tab 2" class="w-tab-pane"><div class="html-embed chart w-embed w-script"><div id="RentalEconomy2"></div>
+<script type="text/javascript">
+var RentalEconomy2 = new Highcharts.Chart({
+	 colors : ['#9A77CF'],
 	 chart: {
-  	renderTo: 'EconomyTotalSASBVol',
+  	renderTo: 'RentalEconomy2',
+    type: 'column',
+    marginBottom: 220,
+  },
+	 data: {
+    googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
+    googleSpreadsheetWorksheet: 12
+  },
+  credits: {
+      text: 'Zillow',
+      href: ''
+  },
+  title: {
+      text: 'Bottom Tier Value Change',
+  },
+  yAxis: {
+    labels: {
+      formatter: function() {
+         return this.value+"%";
+    	},
+  	}
+  },
+  tooltip: {
+  	valueSuffix: ""
+  }
+});
+
+</script></div></div></div></div></div>
+
+
+
+<!--
+<script type="text/javascript">
+var RentalEconomy = new Highcharts.Chart({
+	 chart: {
+  	renderTo: 'RentalEconomy',
     "type": "line",
     marginBottom: 150,
   },
 	 data: {
-    googleSpreadsheetKey: a78910140,
+    googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
     googleSpreadsheetWorksheet: 9,
     switchRowsAndColumns: true
   },
@@ -956,6 +1041,17 @@ var EconomyTotalSASBVol = new Highcharts.Chart({
 });
 
 </script></div><p class="paragraph-3 summary">Description (6).<br/></p></div>
+-->
+
+
+
+
+
+
+
+
+
+
 <div id="w-node-de1fb7fdf003-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">COVID-19 volume as a % of non-COVID-19 VOLUME<br/><span class="subtitle">Supply Chain Management</span><br/></h2><div class="html-embed chart w-embed w-script"><div id="RatioCountrySupply"></div>
 <script type="text/javascript">
 var RatioCountrySupply = new Highcharts.Chart({

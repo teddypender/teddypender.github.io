@@ -301,6 +301,51 @@ Unemployment_df_change = Unemployment_df_change[['DateTime', 'Unemployment Rate 
 Unemployment_df.rename({'Unemployment Rate' : 'Unemployment Rate (%)'}, axis = 1, inplace = True)
 Unemployment_df_change.rename({'Unemployment Rate Change' : 'Unemployment Rate Change (%)'}, axis = 1, inplace = True)
 
+
+"""
+Zillow
+ZRI methodology
+Rental Statistics
+http://files.zillowstatic.com/research/public/Metro/Metro_Zri_MultiFamilyResidenceRental.csv
+
+Top Tier Homes
+http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_TopTier.csv
+
+Bottom Tier Homes
+http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_BottomTier.csv
+
+"""
+
+rent_url = "http://files.zillowstatic.com/research/public/Metro/Metro_Zri_MultiFamilyResidenceRental.csv"
+r = requests.get(rent_url).content
+Rent_df = pd.read_csv(io.StringIO(r.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank']).reset_index().rename({0 : 'U.S. Metro Rent - Multi-Family ($)', 'index' : 'DateTime'}, axis = 1,)
+Rent_df['DateTime'] = [pd.datetime(a[1], a[0], 1) for a in [[int(y) for  y in x.split('-')][::-1] for x in Rent_df['DateTime']]]
+Rent_df = Rent_df[-13:]
+
+
+top_url = "http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_TopTier.csv"
+p_top = requests.get(top_url).content
+Top_Tier_ZHVI = pd.read_csv(io.StringIO(p_top.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank']).reset_index().rename({0 : 'Zillow Home Value Index - Top Tier ($)', 'index' : 'DateTime'}, axis = 1,)
+Top_Tier_ZHVI['DateTime'] = [pd.datetime(a[1], a[0], 1) for a in [[int(y) for  y in x.split('-')][::-1] for x in Top_Tier_ZHVI['DateTime']]]
+Top_Tier_ZHVI_Delta =  Top_Tier_ZHVI.copy()  
+Top_Tier_ZHVI_Delta['Zillow Home Value Index - Top Tier Change (%)'] = Top_Tier_ZHVI['Zillow Home Value Index - Top Tier ($)'].pct_change() * 100
+
+Top_Tier_ZHVI_Delta = Top_Tier_ZHVI_Delta[['DateTime','Zillow Home Value Index - Top Tier Change (%)']][-13:]
+Top_Tier_ZHVI = Top_Tier_ZHVI[-13:]
+
+
+bottom_url = "http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_BottomTier.csv"
+p_Bottom = requests.get(bottom_url).content
+Bottom_Tier_ZHVI = pd.read_csv(io.StringIO(p_Bottom.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank']).reset_index().rename({0 : 'Zillow Home Value Index - Bottom Tier ($)', 'index' : 'DateTime'}, axis = 1,)
+Bottom_Tier_ZHVI['DateTime'] = [pd.datetime(a[1], a[0], 1) for a in [[int(y) for  y in x.split('-')][::-1] for x in Bottom_Tier_ZHVI['DateTime']]]
+Bottom_Tier_ZHVI_Delta =  Bottom_Tier_ZHVI.copy()  
+Bottom_Tier_ZHVI_Delta['Zillow Home Value Index - Bottom Tier Change (%)'] = Bottom_Tier_ZHVI_Delta['Zillow Home Value Index - Bottom Tier ($)'].pct_change() * 100
+
+Bottom_Tier_ZHVI_Delta = Bottom_Tier_ZHVI_Delta[['DateTime','Zillow Home Value Index - Bottom Tier Change (%)']][-13:]
+Bottom_Tier_ZHVI = Bottom_Tier_ZHVI[-13:]
+
+
+
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
 
@@ -308,7 +353,7 @@ gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-das
 sh = gc.open('COVID Dashboard')
 
 #add worksheets
-#sh.add_worksheet('Sheet8')
+#sh.add_worksheet('Sheet15')
 
 #select the sheet 
 wks_trump_sp500 = sh[0]
@@ -318,6 +363,11 @@ wks_vix = sh[3]
 wks_region = sh[4]
 wks_unemployment = sh[5]
 wk_unemployment_change = sh[6]
+wk_rent = sh[7]
+wk_top_tier_index = sh[8]
+wk_bottom_tier_index = sh[9]
+wk_top_tier_index_change = sh[10]
+wk_bottom_tier_index = sh[11]
 
 #update the sheets with the dataframes. 
 wks_trump_sp500.set_dataframe(df_polls_sp500,(1,1))
@@ -327,6 +377,10 @@ wks_vix.set_dataframe(VIX,(1,1))
 wks_region.set_dataframe(df_COVID_Region_PCT,(1,1))
 wks_unemployment.set_dataframe(Unemployment_df,(1,1))
 wk_unemployment_change.set_dataframe(Unemployment_df_change,(1,1))
-
+wk_rent.set_dataframe(Rent_df,(1,1))
+wk_top_tier_index.set_dataframe(Top_Tier_ZHVI,(1,1))
+wk_bottom_tier_index.set_dataframe(Bottom_Tier_ZHVI,(1,1))
+wk_top_tier_index_change.set_dataframe(Top_Tier_ZHVI_Delta,(1,1))
+wk_bottom_tier_index.set_dataframe(Bottom_Tier_ZHVI_Delta,(1,1))
 
 
