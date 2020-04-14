@@ -840,46 +840,13 @@ var USBoLS = new Highcharts.Chart({
   yAxis: {
     labels: {
       formatter: function() {
-         return this.value+"";
+         return this.value+"%";
     	},
   	}
   },
   tooltip: {
   	valueSuffix: "",
-  },
-  plotOptions: {
-      series: {
-          events: {
-              show: function () {
-                  var chart = this.chart,
-                      series = chart.series,
-                      i = series.length,
-                      otherSeries;
-                  while (i--) {
-                      otherSeries = series[i];
-                      if (otherSeries != this && otherSeries.visible) {
-                          otherSeries.hide();
-                      }
-                  }
-              },
-              legendItemClick: function() {
-                  if(this.visible){
-                       return false;   
-                  }
-              }
-          }
-      }
-  },
-  series: [{
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-  }]
+  }
 });
 
 </script></div></div><div data-w-tab="Tab 2" class="w-tab-pane"><div class="html-embed chart w-embed w-script"><div id="USBoLS2"></div>
