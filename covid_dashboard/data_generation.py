@@ -228,7 +228,7 @@ df_COVID['Region'] = [region_dict[x] for x in df_COVID.state]
 df_COVID_Region = df_COVID.groupby(['DateTime', 'Region']).sum()
 df_COVID_Region_PCT = df_COVID_Region[['cases']].groupby(level=0).apply(lambda x: 100 * x / x.sum()).fillna(0).round(2).reset_index()
 df_COVID_Region_PCT.rename({'cases' : 'Cases'}, axis = 1, inplace = True)
-
+df_COVID_Region_PCT = df_COVID_Region_PCT.pivot(index='DateTime', columns = 'Region', values = 'Cases').fillna(0).reset_index()
 df_COVID = df_COVID.groupby('DateTime').sum()[['cases', 'deaths']]
 df_COVID['New Cases'] = df_COVID['cases'].diff().fillna(0)
 df_COVID['Death Rate (%)'] = df_COVID['deaths'] / df_COVID['cases'] * 100
