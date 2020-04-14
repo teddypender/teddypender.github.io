@@ -890,7 +890,7 @@ var USBoLS2 = new Highcharts.Chart({
  <h2 class="chart-header bottom-border">Housing Indicators<br/></h2>
   <div class="html-embed chart w-embed w-script"><div id="RentalEconomy"></div>
   -->
- <h2 class="chart-header bottom-border">U.S. Housing Indicators<br /></h2>
+ <h2 class="chart-header bottom-border">ZHVI - U.S. Housing Indicators<br /></h2>
   <div data-duration-in="300" data-duration-out="100" class="w-tabs">
     <div class="w-tab-menu"><a data-w-tab="Tab 1" class="tab-2 w-inline-block w-tab-link w--current">
         <div>Top Tier Property Value Change</div>
@@ -967,108 +967,23 @@ var RentalEconomy2 = new Highcharts.Chart({
 </script></div></div></div></div><p class="paragraph-3 summary">Description (6).<br/></p></div>
 
 
-
-<!--
+<div id="w-node-de1fb7fdf003-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">U.S. Average Rent - ZRI Multi-Family Residence<br/><span class="subtitle">Metropolitan Areas</span><br/></h2><div class="html-embed chart w-embed w-script"><div id="AverageRentMetro"></div>
 <script type="text/javascript">
-var RentalEconomy = new Highcharts.Chart({
+var AverageRentMetro = new Highcharts.Chart({
 	 chart: {
-  	renderTo: 'RentalEconomy',
-    "type": "line",
-    marginBottom: 150,
-  },
-	 data: {
-    googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
-    googleSpreadsheetWorksheet: 9,
-    switchRowsAndColumns: true
-  },
-  credits: {
-      text: 'Truvalue Labs',
-      href: ''
-  },
-  title: {
-      text: 'Truvalue Labs COVID-19 Economy Signal Volume by Region',
-  },
-	tooltip: {
-  	valueDecimals: 1,
-    valueSuffix: "",
-  },
-  yAxis: {
-  	labels: {
-        formatter: function() {
-     			return this.value+"%";
-  			},
-    }
-  },
-  plotOptions: {
-      series: {
-          events: {
-              show: function () {
-                  var chart = this.chart,
-                      series = chart.series,
-                      i = series.length,
-                      otherSeries;
-                  while (i--) {
-                      otherSeries = series[i];
-                      if (otherSeries != this && otherSeries.visible) {
-                          otherSeries.hide();
-                      }
-                  }
-              },
-              legendItemClick: function() {
-                  if(this.visible){
-                       return false;   
-                  }
-              }
-          }
-      }
-  },
-  series: [{
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-    }, {
-        visible: false
-  }],
-});
-
-</script></div><p class="paragraph-3 summary">Description (6).<br/></p></div>
--->
-
-
-
-
-
-
-
-
-
-
-<div id="w-node-de1fb7fdf003-415dff4a" class="neumorphic compact"><h2 class="chart-header bottom-border">COVID-19 volume as a % of non-COVID-19 VOLUME<br/><span class="subtitle">Supply Chain Management</span><br/></h2><div class="html-embed chart w-embed w-script"><div id="RatioCountrySupply"></div>
-<script type="text/javascript">
-var RatioCountrySupply = new Highcharts.Chart({
-	 chart: {
-  	renderTo: 'RatioCountrySupply',
+  	renderTo: 'AverageRentMetro',
     type: 'line'
   },
 	 data: {
-    googleSpreadsheetKey: a78910140,
-    googleSpreadsheetWorksheet: 10
+    googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
+    googleSpreadsheetWorksheet: 8
   },
   credits: {
-      text: 'Truvalue Labs',
+      text: 'Zillow',
       href: ''
   },
   title: {
-      text: 'COVID-19 volume as a % of non-COVID-19 volume - Supply Chain Management',
+      text: 'U.S. Average Rent - ZRI Multi-Family Residence',
   },
   yAxis: {
   	labels: {
@@ -1076,39 +991,7 @@ var RatioCountrySupply = new Highcharts.Chart({
      			return this.value+"%";
   			},
     }
-  },
-  "series": [
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line'
-    },
-    {
-    	type: 'line',
-      color: '#fff',
-      dashStyle: 'shortDash',
-      lineWidth: 3,
-      zIndex: -1
-    },
-    {
-    	type: 'line'
-    },
-  ],
-  plotOptions: {
-    },
+  }
 });
 
 </script></div><p class="paragraph-3 summary">Description (7).</p></div>
