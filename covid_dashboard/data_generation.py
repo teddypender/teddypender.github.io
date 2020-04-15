@@ -355,26 +355,11 @@ key secret: 57ldmqzi26nb494arkhfmwe9e7yxjw4tvekl2e3obwmjcksxl2
 
 """
 
-#headers = {'Content-type': 'application/json'}
-#data = json.dumps({"seriesid": ['LNS14000000'],"startyear":"2019", "endyear":"2020"})
-#p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
-#"https://data.cityofnewyork.us/resource/uczf-rk3c.json"
-#json_data = json.loads(p.text)
-#data = []
-#for series in json_data['Results']['series']:
-#    for item in series['data']:
-#        year = item['year']
-#        period = item['period']
-#        value = item['value']
-#        data.append([year, period, value])
-#        
-#Unemployment_df = pd.DataFrame(data = data, columns = ['Year', 'M', 'Unemployment Rate'])
 
-bicycle_ur = "https://data.cityofnewyork.us/api/views/uczf-rk3c/rows.csv?accessType=DOWNLOAD&api_foundry=true"
-#nycBicycle = requests.get(bicycle_ur).content
-#nycBicycle_df = pd.read_csv(io.StringIO(nycBicycle.decode('utf-8')))
+"""
+St. Louis FRED Data
 
-
+"""
 csv_url = "https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1168&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=GDP&scale=left&cosd=1947-01-01&coed=2019-10-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Quarterly&fam=avg&fgst=lin&fgsnd=2009-06-01&line_index=1&transformation=lin&vintage_date=2020-04-15&revision_date=2020-04-15&nd=1947-01-01"
 
 #authorization
