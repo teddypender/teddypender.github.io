@@ -371,8 +371,8 @@ key secret: 57ldmqzi26nb494arkhfmwe9e7yxjw4tvekl2e3obwmjcksxl2
 #Unemployment_df = pd.DataFrame(data = data, columns = ['Year', 'M', 'Unemployment Rate'])
 
 bicycle_ur = "https://data.cityofnewyork.us/api/views/uczf-rk3c/rows.csv?accessType=DOWNLOAD&api_foundry=true"
-nycBicycle = requests.get(bicycle_ur).content
-nycBicycle_df = pd.read_csv(io.StringIO(nycBicycle.decode('utf-8')))
+#nycBicycle = requests.get(bicycle_ur).content
+#nycBicycle_df = pd.read_csv(io.StringIO(nycBicycle.decode('utf-8')))
 
 
 
