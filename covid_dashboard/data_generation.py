@@ -348,6 +348,34 @@ Bottom_Tier_ZHVI_Delta = Bottom_Tier_ZHVI_Delta[['DateTime','Zillow Home Value I
 Bottom_Tier_ZHVI = Bottom_Tier_ZHVI[-13:]
 
 
+"""
+NYC Bicycle 
+key id: 9hzmpztj8eqcn82r88k5gxv9j
+key secret: 57ldmqzi26nb494arkhfmwe9e7yxjw4tvekl2e3obwmjcksxl2
+
+"""
+
+#headers = {'Content-type': 'application/json'}
+#data = json.dumps({"seriesid": ['LNS14000000'],"startyear":"2019", "endyear":"2020"})
+#p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+#"https://data.cityofnewyork.us/resource/uczf-rk3c.json"
+#json_data = json.loads(p.text)
+#data = []
+#for series in json_data['Results']['series']:
+#    for item in series['data']:
+#        year = item['year']
+#        period = item['period']
+#        value = item['value']
+#        data.append([year, period, value])
+#        
+#Unemployment_df = pd.DataFrame(data = data, columns = ['Year', 'M', 'Unemployment Rate'])
+
+bicycle_ur = "https://data.cityofnewyork.us/api/views/uczf-rk3c/rows.csv?accessType=DOWNLOAD&api_foundry=true"
+nycBicycle = requests.get(bicycle_ur).content
+nycBicycle_df = pd.read_csv(io.StringIO(nycBicycle.decode('utf-8')))
+
+
+
 
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
