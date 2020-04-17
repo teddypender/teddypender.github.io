@@ -14,6 +14,8 @@ import pygsheets
 from functools import reduce
 import requests
 import json
+from fredapi import Fred
+
 
 """
 Trump & Biden w/ S&P 500
@@ -328,8 +330,8 @@ Rent_df = Rent_df[-13:]
 
 top_url = "http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_TopTier.csv"
 p_top = requests.get(top_url).content
-Top_Tier_ZHVI = pd.read_csv(io.StringIO(p_top.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank']).reset_index().rename({0 : 'Zillow Home Value Index - Top Tier ($)', 'index' : 'DateTime'}, axis = 1,)
-Top_Tier_ZHVI['DateTime'] = [pd.datetime(a[1], a[0], 1) for a in [[int(y) for  y in x.split('-')][::-1] for x in Top_Tier_ZHVI['DateTime']]]
+Top_Tier_ZHVI = pd.read_csv(io.StringIO(p_top.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank', 'RegionType', 'StateName']).reset_index().rename({0 : 'Zillow Home Value Index - Top Tier ($)', 'index' : 'DateTime'}, axis = 1,)
+Top_Tier_ZHVI['DateTime'] = [pd.datetime(a[2], a[1], a[0]) for a in [[int(y) for  y in x.split('-')][::-1] for x in Top_Tier_ZHVI['DateTime']]]
 Top_Tier_ZHVI_Delta =  Top_Tier_ZHVI.copy()  
 Top_Tier_ZHVI_Delta['Zillow Home Value Index - Top Tier Change (%)'] = Top_Tier_ZHVI['Zillow Home Value Index - Top Tier ($)'].pct_change() * 100
 
@@ -339,8 +341,8 @@ Top_Tier_ZHVI = Top_Tier_ZHVI[-13:]
 
 bottom_url = "http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_BottomTier.csv"
 p_Bottom = requests.get(bottom_url).content
-Bottom_Tier_ZHVI = pd.read_csv(io.StringIO(p_Bottom.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank']).reset_index().rename({0 : 'Zillow Home Value Index - Bottom Tier ($)', 'index' : 'DateTime'}, axis = 1,)
-Bottom_Tier_ZHVI['DateTime'] = [pd.datetime(a[1], a[0], 1) for a in [[int(y) for  y in x.split('-')][::-1] for x in Bottom_Tier_ZHVI['DateTime']]]
+Bottom_Tier_ZHVI = pd.read_csv(io.StringIO(p_Bottom.decode('utf-8'))).T[[0]].drop(['RegionID', 'RegionName', 'SizeRank', 'RegionType', 'StateName']).reset_index().rename({0 : 'Zillow Home Value Index - Bottom Tier ($)', 'index' : 'DateTime'}, axis = 1,)
+Bottom_Tier_ZHVI['DateTime'] = [pd.datetime(a[2], a[1], a[0]) for a in [[int(y) for  y in x.split('-')][::-1] for x in Bottom_Tier_ZHVI['DateTime']]]
 Bottom_Tier_ZHVI_Delta =  Bottom_Tier_ZHVI.copy()  
 Bottom_Tier_ZHVI_Delta['Zillow Home Value Index - Bottom Tier Change (%)'] = Bottom_Tier_ZHVI_Delta['Zillow Home Value Index - Bottom Tier ($)'].pct_change() * 100
 
@@ -359,8 +361,45 @@ key secret: 57ldmqzi26nb494arkhfmwe9e7yxjw4tvekl2e3obwmjcksxl2
 """
 St. Louis FRED Data
 
+NBER Recessions are target variable 1
+Define Some equivalent period of strong growth (example includes "robust growth" as top 75 percentile of stock market growth months for %YOY change)
+
+
+1.) Industrial Production (%YOY Change)
+2.) Stock Market (%YOY Change)
+3.) Yield Curve (10Y-FFR, 12m M.A %)
+4.) Nonfarm Payrolls (%YOY Change)
+    
+    
 """
-csv_url = "https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1168&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=GDP&scale=left&cosd=1947-01-01&coed=2019-10-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Quarterly&fam=avg&fgst=lin&fgsnd=2009-06-01&line_index=1&transformation=lin&vintage_date=2020-04-15&revision_date=2020-04-15&nd=1947-01-01"
+
+fred = Fred(api_key='e0e39002ebdae285ab9269213a68ccda')
+IndProduction = pd.DataFrame(fred.get_series('INDPRO'), columns = ['IndProduction'])
+YieldCurve = pd.DataFrame(fred.get_series('T10YFF'), columns = ['YieldCurve'])
+NonFarmPay = pd.DataFrame(fred.get_series('PAYEMS'), columns = ['NonFarmPay'])
+sp500 = yf.Ticker("^GSPC")
+StockMarket = sp500.history(period="max")[['Close']].rename({'Close' : 'StockMarket'}, axis = 1)
+
+idx = pd.date_range(min(StockMarket.index), max(StockMarket.index))
+StockMarket = StockMarket.reindex(idx)
+StockMarket.ffill(inplace = True)
+
+idx = pd.date_range(min(IndProduction.index), max(IndProduction.index))
+IndProduction = IndProduction.reindex(idx)
+IndProduction.ffill(inplace = True)
+
+idx = pd.date_range(min(NonFarmPay.index), max(NonFarmPay.index))
+NonFarmPay = NonFarmPay.reindex(idx)
+NonFarmPay.ffill(inplace = True)
+
+idx = pd.date_range(min(YieldCurve.index), max(YieldCurve.index))
+YieldCurve = YieldCurve.reindex(idx)
+YieldCurve.ffill(inplace = True)
+
+Indicator_df = reduce(lambda x, y: pd.merge(x, y, left_index = True, right_index = True), [IndProduction, StockMarket, NonFarmPay, YieldCurve])
+
+
+
 
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
