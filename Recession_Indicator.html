@@ -1,0 +1,805 @@
+<!DOCTYPE html><!-- Last Published: Thu Apr 09 2020 23:32:55 GMT+0000 (Coordinated Universal Time) -->
+<html data-wf-domain="teddypender.github.io/dashboard" data-wf-page="5e8456ed2d549537415dff4a" data-wf-site="5e8456ed2d5495b85d5dff49">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>COVID-19 Dashboard | Macro U.S. Indicators & Trends | Grain Dynamics</title>
+    <meta content="Grain Dynamic’s COVID-19 Dashboard shares deep insights into the effects of COVID-19 U.S. Markets, indicators & politics." name="description" />
+    <meta content="COVID-19 Dashboard | Macro U.S. Indicators amp; Trends | Grain Dynamics" property="og:title" />
+    <meta content="Grain Dynamic’s COVID-19 Dashboard shares deep insights into the effects of COVID-19 U.S. Markets, indicators & politics." property="og:description" />
+    <meta content="https://assets.website-files.com/5e8456ed2d5495b85d5dff49/5e8f4a7d9e37a62d3092eabe_coronavirus_esg_monitor_truvalue_labs.png" property="og:image" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="./covid_dashboard/style/dashboard_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Inconsolata:400,700", "Days One:regular", "Barlow:300,300italic,regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+
+    </script>
+
+    <script type="text/javascript">
+      ! function(o, c) {
+        var n = c.documentElement,
+          t = " w-mod-";
+        n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+      }(window, document);
+
+    </script>
+    <link href="./covid_dashboard/style/wheat.png" rel="shortcut icon" type="image/x-icon" />
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-110798019-2"></script>
+    <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-110798019-2', {
+        'anonymize_ip': false
+      });
+
+    </script><!-- Google Analytics -->
+
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-110798019-2', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- End Google Analytics -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TeddyGrizzly">
+    <meta name="twitter:title" content="Grain Dynamic’s COVID-19 Monitor">
+    <meta name="twitter:description" content="Grain Dynamic’s COVID-19 Dashboard shares deep insights into the effects of COVID-19 U.S. Markets, indicators & politics.">
+    <meta name="twitter:image" content="https://assets.website-files.com/5e8456ed2d5495b85d5dff49/5e8f4a7d9e37a62d3092eabe_coronavirus_esg_monitor_truvalue_labs.png">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e8cdaa59dee0c0012ab3b91&product=inline-share-buttons&cms=website' async='async'></script>
+
+    </script>
+    <style>
+      .truncate {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .hs-input[type=text],
+      .hs-input[type=email] {
+        outline: none;
+        color: #fff;
+        background-color: transparent;
+        padding: 13px;
+        font-size: 20px;
+        border: 1px solid white;
+        width: 100%;
+        margin-bottom: 20px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+      }
+
+      .inputs-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .hs-button {
+        width: 100%;
+        max-width: 350px;
+        margin-top: 0px;
+        padding: 14px 20px;
+        background-color: #000;
+        font-family: Barlow, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 1px;
+        background-color: #fff;
+        color: #000;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+
+      }
+
+      .hs-form-field label {
+        color: #fff;
+      }
+
+      .hs-firstname label,
+      .hs-lastname label,
+      .hs-email label {
+        display: none;
+      }
+
+      .hs-job_function {
+        margin-bottom: 20px;
+      }
+
+      .legal-consent-container p {
+        color: #aaa;
+        font-size: 12px;
+        line-height: 16px;
+        max-width: 686px;
+        margin-bottom: 40px;
+
+      }
+
+      .legal-consent-container .hs-form-booleancheckbox-display>span {
+        line-height: 10px;
+      }
+
+      .legal-consent-container .hs-form-booleancheckbox-display p {
+        font-size: 16px;
+        color: #fff;
+      }
+
+      .cookie-reset-container {
+        font-size: 11px !important;
+        color: #aaa;
+        margin-top: -20px;
+      }
+
+      .cookie-reset-container a {
+        text-decoration: underline;
+        color: #aaa;
+      }
+
+      .hs_error_rollup,
+      .hs-form-required {
+        color: #f2545b;
+      }
+
+      .hs-form-required {
+        font-size: 20px;
+      }
+
+      .hs-form-field label {
+        font-weight: normal;
+      }
+
+      .submitted-message {
+        color: #eee;
+        font-size: 18px;
+      }
+
+      .hs-firstname .hs-error-msgs.inputs-list,
+      .hs-lastname .hs-error-msgs.inputs-list,
+      .hs-email .hs-error-msgs.inputs-list {
+        display: none !important;
+      }
+
+      .highcharts-title {
+        display: none;
+      }
+
+      .highcharts-container .logo {
+        display: none;
+      }
+
+      .share-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        padding-right: 10px !important;
+        font-weight: bold;
+        margin-top: 10px;
+        min-width: 120px;
+      }
+
+      body.subscribe-page a.subscribe {
+        display: none;
+      }
+
+    </style>
+
+
+    <div class="section-7 homepage">
+      <div class="w-layout-grid grid-9">
+        <div class="about-column">
+          <h2 class="heading-5">Introduction</h2>
+          <p class="paragraph footer">Holistic trends and metadata on the discussion & course of the novel Coronavirus as well as the impact of the global pandemic on the presidential race & the US economy.</p>
+          <p class="paragraph footer">Grain’s mission is to smooth the process of data aggregation & deliver increased transparency to all by providing analytics that both maintain granularity & go beyond traditional fundamentals.</p>
+          <p class="paragraph footer">To learn more about us, go to <a href="https://teddypender.github.io/dashboard" target="_blank" class="link-8">teddypender.github.io</a>.</p>
+          <p class="paragraph footer">For other questions, email us at <a href="mailto:teddyjfpender@gmail.com?subject=&quot;COVID-19 Dashboard&quot;" class="link-8">teddyjfpender@gmail.com</a>.</p>
+          <div class="w-layout-grid grid-12">
+            <div>
+              <div class="w-clearfix">
+                <h3 class="subhead">SOURCES</h3><a href="https://teddypender.github.io" target="_blank" class="footer-link-2">Grain</a><a href="https://systems.jhu.edu/research/public-health/ncov/" target="_blank" class="footer-link-2">Johns Hopkins University</a><a href="https://finance.yahoo.com/" target="_blank" class="footer-link-2">Yahoo Finance</a><a href="https://www.zillow.com" target="_blank" class="footer-link-2">Zillow</a>
+              </div>
+            </div>
+            <div>
+              <div class="w-clearfix">
+                <h3 class="subhead">ADDITIONAL RESEARCH</h3><a href="https://teddypender.github.io/dashboard" target="_blank" class="footer-link-2">Pender &amp; Co.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-column">
+          <div class="sidebar">
+            <h3 class="heading-8">Stay updated</h3>
+            <div class="text-block-4">Sign up to receive our weekly COVID-19 updates and research.</div><a data-w-id="3bdb01a6-17d1-f6b7-f163-84e10a8fef75" href="#" class="button subscribe w-button">SUBSCRIBE</a>
+          </div>
+          <div class="sidebar">
+            <h3 class="heading-8">Download the full dataset</h3>
+            <div class="text-block-4">Download our complete COVID-19 dataset with data dictionary on how to use it.</div><a data-w-id="a9fc2e14-864c-07eb-3421-0035deae9cad" href="#" class="button download w-button">DOWNLOAD DATA</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-layout-grid bottom-footer"><img src="./covid_dashboard/style/wheat.png" alt="" class="image-7" />
+        <div class="text-block-7"><a href="https://teddypender.github.io/dashboard/privacy" target="_blank" class="terms">Terms</a> <a href="https://teddypender.github.io/dashboard" target="_blank" class="terms">Privacy</a> <span class="text-span-4">© 2020 Grain Dynamics</span></div>
+      </div>
+    </div>
+    <div id="data-download" data-w-id="c674f57e-776c-17fb-5a5d-351c8899437e" style="display:none;opacity:0" class="subscribe-container">
+      <div class="popup subscribe-popup w-clearfix">
+        <div data-w-id="76d55067-ee49-5bc3-7ac3-e85991427abd" class="div-block-9"><a href="#" data-w-id="76d55067-ee49-5bc3-7ac3-e85991427abe" class="close-subscribe">x</a></div>
+        <h1 class="heading-5 subscribe">Subscribe</h1>
+        <div class="text-block-3">Get our weekly analysis on COVID-19 trends.</div>
+        <div class="html-embed-4 home w-embed w-script">
+          <!--[if lte IE 8]>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+<![endif]-->
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              portalId: "4137330",
+              formId: "51a4e76f-9473-4730-a23f-c8ef16ed2ac6"
+            });
+
+          </script>
+        </div>
+      </div>
+      <div data-w-id="c674f57e-776c-17fb-5a5d-351c889943a3" class="background-overlay"></div>
+    </div>
+    <div data-w-id="37436e61-5f66-29ca-f8ca-96591a483260" style="display:none;opacity:0" class="download-container">
+      <div class="popup subscribe-popup download-popup w-clearfix">
+        <div class="div-block-9"><a href="#" data-w-id="7b73ed3f-4c0d-924e-74a4-e2261b045463" class="close-download-popup">x</a></div>
+        <h1 class="heading-5 subscribe">Download the Full Dataset</h1>
+        <div class="w-layout-grid grid-17">
+          <div id="w-node-e543fc41b4e8-415dff4a" class="div-block-15">
+            <div class="text-block-3">Download our raw COVID-19 dataset for use in your own analysis and projects. For media inquiries or external citation questions, please email <a href="mailto:teddyjfpender@gmail.com" target="_blank" class="link-11">teddyjfpender@gmail.com</a>.<br /></div>
+            <div class="div-block-16">
+              <h3 class="subhead">What you get</h3>
+              <div class="file-list"><strong class="filename">COVID-19 Aggregate Level Data<br />‍</strong>Provides COVID-19 data from articles (unstructured text) that have been tagged to categories by Grain's AI Engine. Identifies magnitude of positive or negative sentiment for the COVID-19 specific content. Data rolls up to the following aggregates: Country, Geographic Region, Category, Industry, Sector.<br /><br /><strong class="filename">COVID-19 Aggregate Level All Data File<br />‍</strong>Provides COVID-19 data from a broader universe of articles (unstructured text) where any article, no matter its relevance, is reviewed and tagged for COVID-19 relevance. Data rolls up to the following aggregates: Country, Geographic Region, Industry, Sector.<br /><br /><strong class="filename">COVID-19 Company Data File<br />‍</strong>Provides COVID-19 data for individual companies.</div>
+            </div>
+            <div class="div-block-14">
+              <div class="text-block-5 attribution"><strong>Reuse</strong> of our data is only permitted with attribution: <strong>Grain Dynamics’ COVID-19 Monitor</strong>, https://teddypender.github.io/dashboard.</div>
+            </div>
+          </div>
+          <div id="w-node-3dbb27f212e1-415dff4a" class="w-embed w-script">
+            <!--[if lte IE 8]>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+<![endif]-->
+            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+            <script>
+              hbspt.forms.create({
+                portalId: "4137330",
+                formId: "80366909-3c3a-401b-b55a-fe1306c221c5",
+                onFormSubmit: function($form) {
+                  $("#data-download").delay(2200).fadeOut(500);
+                }
+              });
+
+            </script>
+          </div>
+        </div>
+      </div>
+      <div data-w-id="36e6f917-296a-51f5-d6e3-6f77a7d1fa75" class="background-overlay"></div>
+    </div>
+    <div id="welcome" class="ftux">
+      <div class="ftux-popup w-clearfix">
+        <div data-w-id="dc2a1370-9e8c-8e66-02e5-067445198f81" class="div-block-9"><a href="#" id="close" data-w-id="dc2a1370-9e8c-8e66-02e5-067445198f82" class="close-download ftux-close">x</a></div>
+        <div class="w-layout-grid grid-13">
+          <div id="w-node-36dd3525d325-415dff4a"><img src="https://assets.website-files.com/5e8456ed2d5495b85d5dff49/5e86adb197d63e01a425950b_coronavirus_esg_monitor.gif" alt="" class="image-6" /></div>
+          <h3 id="w-node-01f57bc7b460-415dff4a" class="heading-9">Welcome</h3>
+          <div id="w-node-f5dc7a84bb26-415dff4a">
+            <div class="text-block-5">Grain brings you the COVID-19 Monitor to surface trends and insights where the COVID-19 pandemic intersects with U.S. based indicators. <br />‍<br />All of our data is available to download for your own research or dashboards. For weekly COVID-19 updates, subscribe to our newsletter.</div>
+          </div><a id="enter" data-w-id="3dc5a5c4-ff8e-569a-4ebc-4c527f11ad53" href="#" class="button download enter w-node-4c527f11ad53-415dff4a w-button">SEE THE DASHBOARD</a>
+          <div id="w-node-d1ba283ac3f4-415dff4a" class="div-block-14">
+            <div class="text-block-5 attribution"><strong>Reuse</strong> of our data is only permitted with attribution: <strong>Grain Dynamic’s Coronavirus Monitor</strong>, teddypender.github.io/dashboard.</div>
+          </div>
+        </div>
+      </div>
+      <div id="bg-overlay" data-w-id="e16cc036-9d2c-e502-1405-1233ced3d1dc" class="background-overlay download-background"></div>
+    </div>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5e8456ed2d5495b85d5dff49" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://assets.website-files.com/5e8456ed2d5495b85d5dff49/js/covid19-esg-monitor.cc26d0377.js" type="text/javascript"></script>
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4137330.js"></script>
+    <!-- End of HubSpot Embed Code -->
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+      }(document, "script", "twitter-wjs"));
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+      Highcharts.setOptions({
+        colors: ['#F58212', '#FE9F01', '#FFFDD3', '#FFF3A5', '#7789BF', '#9A77CF', '#EC4176', '#FFFFFF'],
+        chart: {
+          animation: {
+            duration: 300
+          },
+          backgroundColor: 'transparent',
+          spacing: [25, 5, 25, 5],
+          marginTop: 38,
+          marginBottom: 100,
+          style: {
+            fontFamily: 'Arial, sans-serif'
+          },
+          events: {
+            load: function() {
+              logoY = this.chartHeight - 69;
+              this.renderer.image('https://raw.githubusercontent.com/teddypender/teddypender.github.io/master/covid_dashboard/style/wheat.png', //https://www.flaticon.com/free-icon/wheat_263859#
+                10, logoY, 50, 50).addClass('logo').add();
+            }
+          }
+        },
+        title: {
+          y: -6,
+          style: {
+            color: '#fff',
+            fontFamily: 'Barlow, sans-serif',
+            fontWeight: '600',
+            fontSize: '16px'
+          },
+          align: 'left'
+        },
+        credits: {
+          style: {
+            color: '#666',
+            fontSize: '11px',
+            cursor: 'arrow'
+          },
+          position: {
+            y: -8,
+          }
+        },
+        plotOptions: {
+          series: {
+            lineWidth: 3,
+            borderColor: 'transparent',
+            marker: {
+              enabled: false,
+              symbol: 'diamond',
+              lineWidth: .1,
+              lineColor: '#fff'
+            },
+            states: {
+              inactive: {
+                opacity: .3,
+              }
+            },
+            events: {
+              legendItemClick: function() {
+                var clickedSeries = this,
+                  series = clickedSeries.chart.series,
+                  allSeriesVis = series.map(series => series.visible),
+                  isSeriesVis;
+
+                allSeriesVis[clickedSeries.index] = !allSeriesVis[clickedSeries.index];
+                isSeriesVis = allSeriesVis.some(vis => vis);
+                if (!isSeriesVis) return false;
+              }
+            }
+          }
+        },
+        legend: {
+          layout: 'horizontal',
+          align: 'center',
+          verticalAlign: 'bottom',
+          itemHiddenStyle: {
+            color: '#666',
+          },
+          itemStyle: {
+            color: '#ddd',
+            fontSize: '12px',
+            fontFamily: 'Barlow, sans-serif',
+            fontWeight: '500',
+            cursor: 'pointer'
+          },
+          itemHoverStyle: {
+            color: '#fff'
+          }
+        },
+        tooltip: {
+          shared: true,
+          valueDecimals: 1,
+          valueSuffix: "%",
+          animation: true,
+          hideDelay: 0,
+          backgroundColor: 'rgba(0,0,0,.85)',
+          borderRadius: 0,
+          borderWidth: 0,
+          useHTML: true,
+          headerFormat: '<div style="margin-bottom: 4px; font-size:11px; color: #eee; font-weight: bold;">{point.key}</div>',
+          pointFormat: '<div style="margin: 2px 0;"><span style="color:{point.color}; font-size: 16px;line-height: 16px;">■</span> {series.name}: <b>{point.y}</b></div>',
+          style: {
+            fontSize: '12px',
+            color: '#eee'
+          }
+        },
+        yAxis: {
+          gridLineColor: 'rgba(150,150,150,.2)',
+          title: {
+            text: ''
+          },
+          labels: {
+            style: {
+              color: '#888',
+              fontSize: '12px'
+            }
+          }
+        },
+        xAxis: {
+          crosshair: {
+            width: 1.5,
+            color: 'rgba(255,255,255,.4)',
+            dashStyle: 'shortdot'
+          },
+          lineColor: 'rgba(150,150,150,0)',
+          tickLength: 0,
+          labels: {
+            style: {
+              color: '#888',
+              fontSize: '12px'
+            }
+          }
+        },
+        navigation: {
+          buttonOptions: {
+            symbolX: 18,
+            symbolY: 18,
+          },
+          menuStyle: {
+            background: '#fff',
+            boxShadow: '4px 4px 12px rgba(0,0,0,.8)',
+            border: '0',
+            fontFamily: 'Barlow, sans-serif',
+            fontWeight: 500,
+          },
+          menuItemStyle: {
+            fontSize: '14px',
+          },
+          menuItemHoverStyle: {
+            background: "#222",
+          },
+        },
+        exporting: {
+          scale: 3,
+          buttons: {
+            contextButton: {
+              enabled: true,
+              menuItems: [{
+                text: 'Download CSV',
+                onclick: function() {
+                  this.downloadCSV();
+                  ga('send', 'event', 'Download', 'CSV', this.options.title.text);
+                }
+              }, {
+                text: 'Download PNG',
+                onclick: function() {
+                  this.exportChart({
+                    type: 'image/png'
+                  });
+                  ga('send', 'event', 'Download', 'PNG', this.options.title.text);
+                }
+              }],
+              align: 'right',
+              verticalAlign: 'top',
+              symbol: 'url(https://raw.githubusercontent.com/teddypender/teddypender.github.io/master/covid_dashboard/style/down-arrow.png)',
+              height: 22,
+              width: 22,
+              y: -25,
+              symbolStroke: '#aaa',
+              symbolFill: 'transparent',
+              theme: {
+                fill: 'transparent',
+                states: {
+                  hover: {
+                    fill: '#333'
+                  },
+                  select: {
+                    fill: '#111'
+                  }
+                }
+              },
+
+            },
+          },
+          menuItemDefinitions: {
+            'downloadPNG': {
+              text: 'Download PNG'
+            },
+            'downloadSVG': {
+              text: 'Download SVG'
+            },
+            'downloadCSV': {
+              text: 'Download CSV'
+            }
+          },
+          csv: {
+            dateFormat: '%Y-%m-%d'
+          },
+          xlsx: {
+            worksheet: {
+              autoFitColumns: true,
+              categoryColumnTitle: 'Month',
+              dateFormat: 'yyyy-mm',
+              name: 'Export XLSX Test'
+            },
+            workbook: {
+              fileProperties: {
+                Author: "File Author",
+                Company: "File Company",
+                CreatedDate: new Date(Date.now())
+              }
+            }
+          },
+          "chartOptions": {
+            "title": {
+              "style": {
+                "color": '#888'
+              }
+            },
+            credits: {
+              enabled: false,
+            },
+            "chart": {
+              "backgroundColor": '#232323',
+              spacing: [30, 15, 35, 15],
+              marginTop: 45
+
+            },
+            "legend": {
+              "itemStyle": {
+                "color": "#666",
+                fontWeight: '600',
+              }
+            },
+          },
+        },
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              chart: {
+                height: null,
+                marginBottom: undefined,
+                spacing: [25, 5, 25, 5],
+
+              }
+            }
+          }]
+        }
+      });
+
+      var a = ['\x74\x65\x73\x74', '\x63\x6f\x6d\x70\x69\x6c\x65', '\x31\x31\x62\x54\x75\x39\x37\x35\x79\x47\x4b\x5f\x6d\x75\x66\x4c\x58\x2d\x67\x39\x4c\x47\x54\x30\x2d\x58\x41\x63\x4c\x53\x36\x53\x43\x4d\x4b\x35\x4b\x41\x32\x6a\x4e\x4c\x56\x4d', '\x72\x65\x74\x75\x72\x6e\x20\x2f\x22\x20\x2b\x20\x74\x68\x69\x73\x20\x2b\x20\x22\x2f', '\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72'];
+      var b = function(c, d) {
+        c = c - 0x0;
+        var e = a[c];
+        return e;
+      };
+      var d = function() {
+        var e = !![];
+        return function(f, g) {
+          var h = e ? function() {
+            if (g) {
+              var i = g['\x61\x70\x70\x6c\x79'](f, arguments);
+              g = null;
+              return i;
+            }
+          } : function() {};
+          e = ![];
+          return h;
+        };
+      }();
+      var c = d(this, function() {
+        var e = function() {
+          var f = e[b('\x30\x78\x34')](b('\x30\x78\x33'))()[b('\x30\x78\x31')]('\x5e\x28\x5b\x5e\x20\x5d\x2b\x28\x20\x2b\x5b\x5e\x20\x5d\x2b\x29\x2b\x29\x2b\x5b\x5e\x20\x5d\x7d');
+          return !f[b('\x30\x78\x30')](c);
+        };
+        return e();
+      });
+      c();
+      var a78910140 = b('\x30\x78\x32');
+
+    </script>
+    <script>
+      var Webflow = Webflow || [];
+
+      Webflow.push(function() {
+
+        let now;
+        let expire;
+
+        let permission = localStorage.getItem('wfPermission');
+        let visitStamp = moment().format('YYYY-MM-DD');
+        let getExpiry = localStorage.getItem('expiration');
+        let comparison = moment(visitStamp).isBefore(getExpiry);
+
+        if (permission == 'TRUE' && comparison == true) {
+          $("#welcome").hide();
+        } else {
+          $("#welcome").show();
+          $("#bg-overlay").fadeTo("slow", 0.8);
+        }
+
+        $("#close, #enter").click(function() {
+
+          now = moment().format('YYYY-MM-DD');
+          expire = moment().add(30, 'days').calendar();
+          expire = moment(expire).format('YYYY-MM-DD');
+
+          localStorage.setItem('wfPermission', 'TRUE');
+          localStorage.setItem('timestamp', now);
+          localStorage.setItem('expiration', expire);
+
+        });
+
+      });
+
+    </script>
+  </head>
+
+  <body class="body">
+    <div class="html-embed-6 w-embed w-script">
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+      <div id="top"></div>
+    </div>
+    <div data-w-id="b581a8ed-8d2b-dee5-1077-222a82ec675f" class="div-block-2 bg-blur mobile">
+      <div class="section">
+        <div class="w-layout-grid grid-14">
+          <div id="w-node-222a82ec6762-82ec675f" class="div-block-12"><a href="https://teddypender.github.io/dashboard" class="w-inline-block">
+              <h4 class="heading-55">Coronavirus Dashboard</h4>
+            </a><a data-w-id="d6829772-dd85-475f-4375-22aaf3eac522" href="#" class="button-3 subscribe w-button">SUBSCRIBE TO UPDATES</a></div>
+          <div id="w-node-222a82ec6764-82ec675f" class="div-block-11 w-clearfix"><a id="w-node-222a82ec6767-82ec675f" href="https://teddypender.github.io/dashboard" target="_blank" class="link-block w-inline-block">
+              <h4 class="heading-55">Grain Dynamics</h4>
+            </a>
+            <div data-hover="" data-delay="0" class="dropdown w-dropdown">
+              <div class="dropdown-toggle w-dropdown-toggle"><img src="https://assets.website-files.com/5e8456ed2d5495b85d5dff49/5e8cbe6ae2c1e00a3c2b6403_share.svg" alt="" class="image-8" /></div>
+              <nav class="dropdown-list w-dropdown-list">
+                <div class="w-embed w-script">
+                  <!-- AddToAny BEGIN -->
+                  <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://teddypender.github.io/dashboard" data-a2a-title="Coronavirus ESG Monitor">
+                    <a class="a2a_button_twitter share-button" style="background: #55acef;">Twitter</a>
+                    <a class="a2a_button_linkedin share-button" style="background: #007ab5;">LinkedIn</a>
+                  </div>
+
+                  <script>
+                    var a2a_config = a2a_config || {};
+                    a2a_config.num_services = 2;
+
+                  </script>
+                  <script async src="https://static.addtoany.com/menu/page.js"></script>
+                  <!-- AddToAny END -->
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-3">
+      <div class="w-layout-grid grid-66">
+        <div id="w-node-44a08bb7354c-415dff4a" class="neumorphic compact">
+          <h2 class="chart-header bottom-border">Trump-Biden Polling Averages And S&amp;P 500 Performance (Re-based as of 1/15/20)<br /></h2>
+          <div class="html-embed chart w-embed w-script">
+            <div id="TotalVol"></div>
+            <script type="text/javascript">
+              var TotalVol = new Highcharts.Chart({
+                colors: ['#3F52B9', '#DE3947', '#FFFFFF'],
+                "chart": {
+                  renderTo: 'TotalVol',
+                  "type": "line",
+                  marginBottom: 120
+                },
+                data: {
+                  googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
+                  googleSpreadsheetWorksheet: 1
+                },
+                credits: {
+                  text: 'Fivethirtyeight, Yahoo Finance',
+                  href: ''
+                },
+                title: {
+                  text: 'Trump & Biden Polling Changed with S&P 500 Re-based as of 1/15/20',
+                },
+                tooltip: {
+                  valueDecimals: 1,
+                },
+                "series": [{
+                    type: 'line',
+                  },
+                  {
+                    type: 'line',
+                  },
+                  {
+                    type: 'line',
+                  }
+                ],
+                yAxis: [{
+                  gridLineColor: 'rgba(150,150,150,.2)',
+                  labels: {
+                    formatter: function() {
+                      return this.value + "%";
+                    },
+                  }
+                }, {
+                  gridLineColor: 'transparent',
+                  labels: {
+                    formatter: function() {
+                      return this.value + "%";
+                    },
+                  }
+                }, {
+                  gridLineColor: 'transparent',
+                  labels: {
+                    formatter: function() {
+                      return this.value + "%";
+                    },
+                  }
+                }],
+                exporting: {
+                  chartOptions: {
+                    credits: {
+                      enabled: true,
+                    },
+                  }
+                }
+              });
+
+            </script>
+          </div>
+          <p class="paragraph-3 summary">Insert description here (1). <br /></p>
+        </div>
+
+        <div id="w-node-debbc89a2dd2-415dff4a" class="text-block-13"><strong class="bold-text-8">Last Updated:</strong> Apr 8th, 10:24 PDT</div>
+      </div>
+    </div>
+
+
+
+  </body>
+
+</html>

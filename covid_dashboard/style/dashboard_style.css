@@ -2767,6 +2767,11 @@ a {
   grid-column-gap: 16px
 }
 
+.grid-66 {
+  -ms-grid-rows: auto auto auto auto;
+  grid-column-gap: 16px
+}
+
 .heading-3 {
   margin-top: 7vh;
   margin-bottom: 40px;
@@ -2956,6 +2961,12 @@ a {
 }
 
 .grid-6 {
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto
+}
+
+.grid-66 {
   -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto
@@ -4262,6 +4273,10 @@ a {
   .grid-6 {
     grid-auto-columns: 1fr
   }
+  
+  .grid-66 {
+    grid-auto-columns: 1fr
+  }
 
   .background-overlay,
   .ftux-popup {
@@ -4325,6 +4340,11 @@ a {
   .grid-6 {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr
+  }
+  
+  .grid-66 {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .grid-7 {
@@ -4591,6 +4611,10 @@ a {
   }
 
   .grid-6 {
+    -ms-grid-columns: 1.5fr;
+    grid-template-columns: 1.5fr
+  }
+  .grid-66 {
     -ms-grid-columns: 1.5fr;
     grid-template-columns: 1.5fr
   }

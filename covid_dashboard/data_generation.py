@@ -350,57 +350,6 @@ Bottom_Tier_ZHVI_Delta = Bottom_Tier_ZHVI_Delta[['DateTime','Zillow Home Value I
 Bottom_Tier_ZHVI = Bottom_Tier_ZHVI[-13:]
 
 
-"""
-NYC Bicycle 
-key id: 9hzmpztj8eqcn82r88k5gxv9j
-key secret: 57ldmqzi26nb494arkhfmwe9e7yxjw4tvekl2e3obwmjcksxl2
-
-"""
-
-
-"""
-St. Louis FRED Data
-
-NBER Recessions are target variable 1
-Define Some equivalent period of strong growth (example includes "robust growth" as top 75 percentile of stock market growth months for %YOY change)
-
-
-1.) Industrial Production (%YOY Change)
-2.) Stock Market (%YOY Change)
-3.) Yield Curve (10Y-FFR, 12m M.A %)
-4.) Nonfarm Payrolls (%YOY Change)
-    
-    
-"""
-
-fred = Fred(api_key='e0e39002ebdae285ab9269213a68ccda')
-IndProduction = pd.DataFrame(fred.get_series('INDPRO'), columns = ['IndProduction'])
-YieldCurve = pd.DataFrame(fred.get_series('T10YFF'), columns = ['YieldCurve'])
-NonFarmPay = pd.DataFrame(fred.get_series('PAYEMS'), columns = ['NonFarmPay'])
-sp500 = yf.Ticker("^GSPC")
-StockMarket = sp500.history(period="max")[['Close']].rename({'Close' : 'StockMarket'}, axis = 1)
-
-idx = pd.date_range(min(StockMarket.index), max(StockMarket.index))
-StockMarket = StockMarket.reindex(idx)
-StockMarket.ffill(inplace = True)
-
-idx = pd.date_range(min(IndProduction.index), max(IndProduction.index))
-IndProduction = IndProduction.reindex(idx)
-IndProduction.ffill(inplace = True)
-
-idx = pd.date_range(min(NonFarmPay.index), max(NonFarmPay.index))
-NonFarmPay = NonFarmPay.reindex(idx)
-NonFarmPay.ffill(inplace = True)
-
-idx = pd.date_range(min(YieldCurve.index), max(YieldCurve.index))
-YieldCurve = YieldCurve.reindex(idx)
-YieldCurve.ffill(inplace = True)
-
-Indicator_df = reduce(lambda x, y: pd.merge(x, y, left_index = True, right_index = True), [IndProduction, StockMarket, NonFarmPay, YieldCurve])
-
-
-
-
 #authorization
 gc = pygsheets.authorize(service_file='/Users/theodorepender/Desktop/covid19-dashboard-274000-97b3f9900832.json')
 
