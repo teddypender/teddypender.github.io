@@ -1939,6 +1939,7 @@ fieldset[disabled] .w-select {
 }
 
 .html-embed,
+.html-embed2,
 .paragraph.footer,
 .w-nav-link {
   margin-right: auto;
@@ -2273,10 +2274,19 @@ a {
   text-align: center
 }
 
+.html-embed2 {
+  max-width: 1000px;
+  min-height: 200px;
+  text-align: center
+}
+
+
 .html-embed.chart {
   min-height: 300px
 }
-
+.html-embed2.chart {
+  min-heigh: 200px
+}
 .paragraph {
   padding-right: 20px;
   padding-left: 20px;
@@ -4561,7 +4571,7 @@ a {
   }
 
   .neumorphic {
-    min-height: 400px;
+    min-height: 800px;
     margin-right: 10px;
     margin-left: 10px;
     padding-top: 25px

@@ -720,60 +720,39 @@
         </div>
       </div>
     </div>
-    <div class="section-3">
-      <div class="w-layout-grid grid-66">
+    <div class="section-3" >
         <div id="w-node-44a08bb7354c-415dff4a" class="neumorphic compact">
-          <h2 class="chart-header bottom-border">Trump-Biden Polling Averages And S&amp;P 500 Performance (Re-based as of 1/15/20)<br /></h2>
-          <div class="html-embed chart w-embed w-script">
-            <div id="TotalVol"></div>
+          <h2 class="chart-header bottom-border">Recession Indicator<br /></h2>
+          <div class="html-embed2 chart w-embed w-script">
+            <div id="RecessionIndex"></div>
             <script type="text/javascript">
-              var TotalVol = new Highcharts.Chart({
-                colors: ['#3F52B9', '#DE3947', '#FFFFFF'],
+              var RecessionIndex = new Highcharts.Chart({
+                colors: ['#FFFFFF'],
                 "chart": {
-                  renderTo: 'TotalVol',
+                  renderTo: 'RecessionIndex',
                   "type": "line",
                   marginBottom: 120
                 },
                 data: {
                   googleSpreadsheetKey: '1Bs0xB_pUrA3nyloh7mj-NOAe51nKodrEFPff4ijB_OU',
-                  googleSpreadsheetWorksheet: 1
+                  googleSpreadsheetWorksheet: 4
                 },
                 credits: {
-                  text: 'Fivethirtyeight, Yahoo Finance',
+                  text: 'Grain',
                   href: ''
                 },
                 title: {
-                  text: 'Trump & Biden Polling Changed with S&P 500 Re-based as of 1/15/20',
+                  text: 'Recession Indicator',
                 },
                 tooltip: {
                   valueDecimals: 1,
                 },
                 "series": [{
                     type: 'line',
-                  },
-                  {
-                    type: 'line',
-                  },
-                  {
-                    type: 'line',
                   }
                 ],
                 yAxis: [{
                   gridLineColor: 'rgba(150,150,150,.2)',
-                  labels: {
-                    formatter: function() {
-                      return this.value + "%";
-                    },
-                  }
-                }, {
-                  gridLineColor: 'transparent',
-                  labels: {
-                    formatter: function() {
-                      return this.value + "%";
-                    },
-                  }
-                }, {
-                  gridLineColor: 'transparent',
                   labels: {
                     formatter: function() {
                       return this.value + "%";
@@ -795,7 +774,6 @@
         </div>
 
         <div id="w-node-debbc89a2dd2-415dff4a" class="text-block-13"><strong class="bold-text-8">Last Updated:</strong> Apr 8th, 10:24 PDT</div>
-      </div>
     </div>
 
 
@@ -803,3 +781,46 @@
   </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
